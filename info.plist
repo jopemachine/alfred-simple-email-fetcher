@@ -213,7 +213,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>./node_modules/.bin/run-node clipCheck.js {"clip"}</string>
+				<string>./node_modules/.bin/run-node checkUnreadMails.js</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -263,7 +263,7 @@
 		<key>285FFD68-859F-4200-B433-E983D2FD1C02</key>
 		<dict>
 			<key>xpos</key>
-			<integer>250</integer>
+			<integer>255</integer>
 			<key>ypos</key>
 			<integer>385</integer>
 		</dict>
