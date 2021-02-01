@@ -1,0 +1,14 @@
+{
+  "name": "alfred-multiple-emails",
+  "version": "1.0.0",
+  "description": "Simple imap client that checks and retrieves unread mails from multiple accounts for Alfred 4",
+  "main": "fetch.js",
+  "scripts": {
+  },
+  "author": "jopemachine",
+  "license": "MIT",
+  "dependencies": {
+    "alfy": "^0.10.0",
+    "imap-simple": "^5.0.0"
+  }
+}
