@@ -112,11 +112,17 @@ process.removeAllListeners('warning');
       case 'providerAndSubject':
         unreadMails = _.sortBy(unreadMails, ['provider', 'title']).reverse()
         break
-      case 'time':
+      case 'timeDesc':
         unreadMails = _.sortBy(unreadMails, ['date']).reverse()
         break
-      case 'providerAndTime':
+      case 'providerAndTimeDesc':
         unreadMails = _.sortBy(unreadMails, ['provider', 'date']).reverse()
+        break
+      case 'timeAsec':
+        unreadMails = _.sortBy(unreadMails, ['date'])
+        break
+      case 'providerAndTimeAsec':
+        unreadMails = _.sortBy(unreadMails, ['provider', 'date'])
         break
       default:
         break
@@ -137,7 +143,9 @@ process.removeAllListeners('warning');
         subtitle,
         autocomplete: mail.title,
         arg: config.accounts[mail.provider].url,
-        quicklookurl: `${getParentAbsolutePath()}/htmlCache/${mail.provider}/${mail.uid}.html`,
+        quicklookurl: `${getParentAbsolutePath()}/htmlCache/${mail.provider}/${
+          mail.uid
+        }.html`,
         icon: {
           path: config.accounts[mail.provider].icon
             ? config.accounts[mail.provider].icon
