@@ -23,7 +23,7 @@ process.removeAllListeners('warning');
         if (!config.accounts[account].enabled) return
 
         const imapConn = await imaps.connect(config.accounts[account])
-        await imapConn.openBox('INBOX', false)
+        await imapConn.openBox('INBOX')
 
         const searchCriteria = ['UNSEEN']
         const fetchOptions = {
@@ -35,9 +35,7 @@ process.removeAllListeners('warning');
         const results = await imapConn.search(searchCriteria, fetchOptions)
         const mails = results.map(function (res) {
           return {
-            title: config.servicePrefix
-              ? `[${account}] ` + res.parts[0].body.subject[0]
-              : res.parts[0].body.subject[0],
+            title: res.parts[0].body.subject[0],
             date: res.parts[0].body.date[0],
             from: res.parts[0].body.from[0],
             provider: account
@@ -82,7 +80,9 @@ process.removeAllListeners('warning');
   } else {
     result = _.map(unreadMails, (mail) => {
       return {
-        title: mail.title,
+        title: config.servicePrefix
+          ? `[${mail.provider}] ` + mail.title
+          : mail.title,
         subtitle: `${mail[config.subtitle]}`,
         autocomplete: '',
         arg: '',

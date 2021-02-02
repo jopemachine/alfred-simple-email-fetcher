@@ -167,7 +167,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>./node_modules/.bin/run-node clipCheck.js {"clip"}</string>
+				<string>./node_modules/.bin/run-node src/searchMails.js</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -408,7 +408,7 @@
 				<key>scriptfile</key>
 				<string>index.js</string>
 				<key>subtext</key>
-				<string>Open config setting</string>
+				<string>Open the config setting file</string>
 				<key>title</key>
 				<string>em &gt; config</string>
 				<key>type</key>
