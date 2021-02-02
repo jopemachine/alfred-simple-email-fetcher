@@ -102,7 +102,12 @@ Type: `String (enum)`
 
 Sorts and returns search results.
 
-`subject` (mail title) or `providerAndSubject` (sort provider first and subject) or `timeDesc` or `timeAsec` or `providerAndTimeAsec` or `providerAndTimeDesc` 
+* `subject` (mail title)
+* `providerAndSubject` (sort provider first and subject)
+* `timeDesc`
+* `timeAsec`
+* `providerAndTimeAsec`
+* `providerAndTimeDesc`
 
 ### usingHtmlCache
 
