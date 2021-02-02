@@ -1,7 +1,7 @@
 {
-  "name": "alfred-multiple-emails",
+  "name": "alfred-unseen-email-fetcher",
   "version": "1.0.0",
-  "description": "Simple workflow that retrieves unread mails from multiple accounts using imap for Alfred 4",
+  "description": "Alfred workflow that fetchs unseen emails from multiple accounts using imap",
   "scripts": {
     "lint": "eslint src"
   },

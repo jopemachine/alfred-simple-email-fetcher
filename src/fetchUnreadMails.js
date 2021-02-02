@@ -137,7 +137,7 @@ process.removeAllListeners('warning');
       }
 
       return {
-        title: config.servicePrefix
+        title: config.providerPrefix
           ? `[${mail.provider}] ` + mail.title
           : mail.title,
         subtitle,

@@ -1,4 +1,4 @@
-# alfred-multiple-emails
+# ✉️ alfred-unseen-email-fetcher
 
 <img src="https://img.shields.io/github/license/jopemachine/alfred-multiple-emails.svg" alt="License">
 
@@ -32,14 +32,14 @@ $ npm install --global alfred-multiple-emails
 You can refer to the [documents](https://github.com/jopemachine/alfred-multiple-emails/tree/master/documents)
 
 
-## 📗 Configuration
+## 📍 Configuration
 
 You can configure detailed settings by editing your `config.json`.
 
 ```json
 {
     "autoMarkSeen": false,
-    "servicePrefix": true,
+    "providerPrefix": true,
     "subtitle": "date",
     "cacheDuration": false,
     "sorting": "providerAndTime",
@@ -80,13 +80,7 @@ Type: `Boolean`
 
 Mark seen when fetch emails
 
-### servicePrefix
-
-Type: `Boolean`
-
-Append email provider name to email record.
-
-### servicePrefix
+### providerPrefix
 
 Type: `Boolean`
 
@@ -129,6 +123,31 @@ You can register multiple email accounts.
 This workflow create one imap connection per each account,
 
 so, if you connect too many accounts or there are too many emails to fetch, response will slow down.
+
+#### url
+
+Type: `String`
+
+open this url when press enter on the email record.
+
+#### enabled
+
+Type: `Boolean`
+
+if this value is false, skip this account
+
+#### icon
+
+Type: `String`
+
+show this path's icon on this account's emails
+
+#### imap
+
+Type: `Object`
+
+imap configuration object used by [imap-simple](https://github.com/chadxz/imap-simple).
+
 
 
 ## 📗 How to use
