@@ -58,6 +58,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9E1FC593-FA1D-47D9-80E4-77B8EF1A93D3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E20B7B34-6572-49B0-A2A2-7A74A12357FC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E20B7B34-6572-49B0-A2A2-7A74A12357FC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F07340C6-2A88-466A-BFC7-F9E16585B0D9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>jopemachine</string>
@@ -69,6 +95,50 @@
 	<string>alfred-multiple-emails</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>./node_modules/.bin/run-node clip.js</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>394586C1-4134-4072-9357-D41F7329EE4A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>The text on the clipboard is made into a note.</string>
+				<key>title</key>
+				<string>Clip complete</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>50831A82-D3E0-4B7D-AF70-424B48AD1B70</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -117,50 +187,6 @@
 			<string>3D2C8358-E7F3-41E8-B505-98EEC0556A12</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>The text on the clipboard is made into a note.</string>
-				<key>title</key>
-				<string>Clip complete</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>50831A82-D3E0-4B7D-AF70-424B48AD1B70</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>./node_modules/.bin/run-node clip.js</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>394586C1-4134-4072-9357-D41F7329EE4A</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -255,6 +281,148 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>The text on the clipboard is made into a note.</string>
+				<key>title</key>
+				<string>Clip complete</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F07340C6-2A88-466A-BFC7-F9E16585B0D9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>./node_modules/.bin/run-node clip.js</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E20B7B34-6572-49B0-A2A2-7A74A12357FC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>em &gt; create</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>./node_modules/.bin/run-node src/createAccount.js</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>index.js</string>
+				<key>subtext</key>
+				<string>Create new email account</string>
+				<key>title</key>
+				<string>em &gt; create</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>9E1FC593-FA1D-47D9-80E4-77B8EF1A93D3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>em &gt; config</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>open ./config.json</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>index.js</string>
+				<key>subtext</key>
+				<string>Open config setting</string>
+				<key>title</key>
+				<string>em &gt; config</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>85A7370C-74C2-49BF-AA7A-4BA53E029A65</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -301,6 +469,34 @@
 			<integer>430</integer>
 			<key>ypos</key>
 			<integer>385</integer>
+		</dict>
+		<key>85A7370C-74C2-49BF-AA7A-4BA53E029A65</key>
+		<dict>
+			<key>xpos</key>
+			<integer>255</integer>
+			<key>ypos</key>
+			<integer>665</integer>
+		</dict>
+		<key>9E1FC593-FA1D-47D9-80E4-77B8EF1A93D3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>255</integer>
+			<key>ypos</key>
+			<integer>525</integer>
+		</dict>
+		<key>E20B7B34-6572-49B0-A2A2-7A74A12357FC</key>
+		<dict>
+			<key>xpos</key>
+			<integer>430</integer>
+			<key>ypos</key>
+			<integer>525</integer>
+		</dict>
+		<key>F07340C6-2A88-466A-BFC7-F9E16585B0D9</key>
+		<dict>
+			<key>xpos</key>
+			<integer>600</integer>
+			<key>ypos</key>
+			<integer>525</integer>
 		</dict>
 	</dict>
 	<key>webaddress</key>

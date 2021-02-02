@@ -1,4 +1,6 @@
 config.json
+cache.json
+cacheTemplate.json
 
 # Logs
 logs
