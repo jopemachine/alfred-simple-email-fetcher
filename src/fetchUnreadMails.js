@@ -27,7 +27,10 @@ process.removeAllListeners('warning');
       _.map(Object.keys(config.accounts), async (account) => {
         if (!config.accounts[account].enabled) return
         if (!fs.existsSync(`htmlCache/${account}`)) {
-          fs.mkdirSync(`htmlCache/${account}`, { recursive: true })
+          await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
+        } else {
+          await fsPromises.rmdir(`htmlCache/${account}`, { recursive: true })
+          await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
         }
 
         const imapConn = await imaps.connect(config.accounts[account])
@@ -71,7 +74,7 @@ process.removeAllListeners('warning');
 
         unreadMails = [...unreadMails, ...mails]
 
-        fs.writeFileSync(
+        await fsPromises.writeFile(
           'cache.json',
           '\ufeff' +
             JSON.stringify(
@@ -82,7 +85,8 @@ process.removeAllListeners('warning');
               null,
               2
             ),
-          { encoding: 'utf8' }
+          { encoding: 'utf-8' },
+          () => {}
         )
 
         // await imapConn.imap.closeBox(true);
@@ -94,14 +98,13 @@ process.removeAllListeners('warning');
   let result = []
   if (unreadMails.length === 0) {
     result.push({
-      title: 'No unread emails',
-      subtitle: '',
-      autocomplete: '',
-      arg: '',
-      quicklookurl: '',
+      title: 'No unseen emails',
       text: {
-        copy: '',
-        largetype: ''
+        copy: 'No unseen emails',
+        largetype: 'No unseen emails'
+      },
+      icon: {
+        path: './icons/empty.png'
       }
     })
   } else {
@@ -148,7 +151,7 @@ process.removeAllListeners('warning');
         }.html`,
         icon: {
           path: config.accounts[mail.provider].icon
-            ? config.accounts[mail.provider].icon
+            ? `./icons/${config.accounts[mail.provider].icon}`
             : './icons/default.png'
         },
         text: {
@@ -163,12 +166,12 @@ process.removeAllListeners('warning');
       subtitle: `Searched through ${
         _.filter(config.accounts, (item) => item.enabled).length
       } providers`,
-      autocomplete: '',
+      autocomplete: `${unreadMails.length}`,
       arg: '',
       quicklookurl: '',
       text: {
-        copy: '',
-        largetype: ''
+        copy: `${unreadMails.length} emails were found.`,
+        largetype: `${unreadMails.length} emails were found.`
       }
     })
   }

@@ -44,7 +44,7 @@ You can configure detailed settings by editing your `config.json`.
         "google": {
             "url": "https://mail.google.com/mail/",
             "enabled": true,
-            "icon": "./icons/google.png",
+            "icon": "google.png",
             "imap": {
                 "user": "user@gmail.com",
                 "password": "some_password",
@@ -57,7 +57,7 @@ You can configure detailed settings by editing your `config.json`.
         "naver": {
             "url": "https://mail.naver.com/",
             "enabled": true,
-            "icon": "./icons/naver.png",
+            "icon": "naver.png",
             "imap": {
                 "user": "user@naver.com",
                 "password": "some_password",
@@ -104,8 +104,8 @@ Sorts and returns search results.
 
 * `subject` (mail title)
 * `providerAndSubject` (sort provider first and subject)
-* `timeDesc`
-* `timeAsec`
+* `timeDesc` (recent email first)
+* `timeAsec` (old email first)
 * `providerAndTimeAsec`
 * `providerAndTimeDesc`
 
@@ -141,7 +141,9 @@ if this value is false, skip this account
 
 Type: `String`
 
-show this path's icon on this account's emails
+show this icon on this account's emails.
+
+icon files should be placed within `icons` folder. 
 
 #### imap
 
