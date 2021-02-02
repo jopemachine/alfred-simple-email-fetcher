@@ -213,7 +213,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>./node_modules/.bin/run-node checkUnreadMails.js</string>
+				<string>./node_modules/.bin/run-node src/fetchUnreadMails.js</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
