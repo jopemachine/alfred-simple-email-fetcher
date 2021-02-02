@@ -5,6 +5,8 @@ const _ = require('lodash')
 const config = require('../config.json')
 const usageCache = require('../cache.json')
 const fs = require('fs')
+const fsPromises = fs.promises
+
 const simpleParser = require('mailparser').simpleParser
 const { getTimeStamp, getParentAbsolutePath } = require('./utils')
 
@@ -39,30 +41,35 @@ process.removeAllListeners('warning');
 
         const messages = await imapConn.search(searchCriteria, fetchOptions)
 
-        messages.forEach(function (item) {
-          const all = _.find(item.parts, { which: '' })
-          const id = item.attributes.uid
-          const idHeader = 'Imap-Id: ' + id + '\r\n'
-          // eslint-disable-next-line node/handle-callback-err
-          simpleParser(idHeader + all.body, (err, mail) => {
-            unreadMails.push({
-              title: mail.subject,
-              from: mail.from.text,
-              provider: account,
-              date: Number(new Date(mail.date).getTime()),
-              uid: id
-            })
+        const mails = await Promise.all(
+          _.map(messages, async function (item) {
+            const header = _.find(item.parts, { which: 'HEADER' })
 
             if (config.usingHtmlCache) {
-              fs.writeFile(
+              const all = _.find(item.parts, { which: '' })
+              const id = item.attributes.uid
+              const idHeader = 'Imap-Id: ' + id + '\r\n'
+              const parsedResult = await simpleParser(idHeader + all.body)
+
+              await fsPromises.writeFile(
                 `htmlCache/${account}/${id}.html`,
-                mail.html,
+                parsedResult.html,
                 { encoding: 'utf-8' },
                 () => {}
               )
             }
+
+            return {
+              uid: item.attributes.uid,
+              provider: account,
+              title: header.body.subject[0],
+              from: header.body.from[0],
+              date: Number(new Date(header.body.date[0]).getTime())
+            }
           })
-        })
+        )
+
+        unreadMails = [...unreadMails, ...mails]
 
         fs.writeFileSync(
           'cache.json',
@@ -77,6 +84,7 @@ process.removeAllListeners('warning');
             ),
           { encoding: 'utf8' }
         )
+
         // await imapConn.imap.closeBox(true);
         // await imapConn.end();
       })
@@ -99,16 +107,16 @@ process.removeAllListeners('warning');
   } else {
     switch (config.sorting) {
       case 'subject':
-        _.sortBy(unreadMails, ['title'])
+        unreadMails = _.sortBy(unreadMails, ['title']).reverse()
         break
       case 'providerAndSubject':
-        _.sortBy(unreadMails, ['provider', 'subject'])
+        unreadMails = _.sortBy(unreadMails, ['provider', 'title']).reverse()
         break
       case 'time':
-        _.sortBy(unreadMails, ['date'])
+        unreadMails = _.sortBy(unreadMails, ['date']).reverse()
         break
       case 'providerAndTime':
-        _.sortBy(unreadMails, ['provider', 'title'])
+        unreadMails = _.sortBy(unreadMails, ['provider', 'date']).reverse()
         break
       default:
         break

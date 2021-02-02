@@ -1,7 +1,7 @@
 {
   "name": "alfred-multiple-emails",
   "version": "1.0.0",
-  "description": "Simple imap client that checks and retrieves unread mails from multiple accounts for Alfred 4",
+  "description": "Simple workflow that retrieves unread mails from multiple accounts using imap for Alfred 4",
   "scripts": {
     "lint": "eslint src"
   },
