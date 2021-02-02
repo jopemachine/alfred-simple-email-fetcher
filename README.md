@@ -2,9 +2,7 @@
 
 <img src="https://img.shields.io/github/license/jopemachine/alfred-multiple-emails.svg" alt="License">
 
-Simple workflow that retrieves unread mails from multiple accounts using imap for Alfred 4
-
-* Just fetchs unread emails through imap
+Fetchs unseen emails through imap
 
 <p align="center">
 <img src="./demo.png">
@@ -15,8 +13,6 @@ Simple workflow that retrieves unread mails from multiple accounts using imap fo
 * Node JS
 
 * [Alfred powerpack](https://www.alfredapp.com/powerpack/)
-
-* Chrome 87.0.4280.88
 
 ##  🔨 How to install
 
