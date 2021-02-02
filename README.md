@@ -4,7 +4,7 @@
 
 Simple workflow that retrieves unread mails from multiple accounts using imap for Alfred 4
 
-* 
+* Just fetchs unread emails through imap
 
 <p align="center">
 <img src="./demo.png">
@@ -74,6 +74,61 @@ You can configure detailed settings by editing your `config.json`.
     }
 }
 ```
+### autoMarkSeen
+
+Type: `Boolean`
+
+Mark seen when fetch emails
+
+### servicePrefix
+
+Type: `Boolean`
+
+Append email provider name to email record.
+
+### servicePrefix
+
+Type: `Boolean`
+
+Append email provider name to email record.
+
+### subtitle
+
+Type: `String (enum)`
+
+`date` or `from`.
+
+### cacheDuration
+
+Type: `Number | Boolean`
+
+set cache period.
+
+To not use caching, set this value to `false`
+
+### sorting
+
+Type: `String (enum)`
+
+Sorts and returns search results.
+
+`subject` (mail title) or `providerAndSubject` (sort provider first and subject) or `timeDesc` or `timeAsec` or `providerAndTimeAsec` or `providerAndTimeDesc` 
+
+### usingHtmlCache
+
+Type: `Boolean`
+
+save and use html cache for quicklook feature
+
+### accounts
+
+Type: `Array of object`
+
+You can register multiple email accounts.
+
+This workflow create one imap connection per each account,
+
+so, if you connect too many accounts or there are too many emails to fetch, response will slow down.
 
 
 ## 📗 How to use
