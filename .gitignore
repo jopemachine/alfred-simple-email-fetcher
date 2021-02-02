@@ -1,6 +1,7 @@
 config.json
 cache.json
 cacheTemplate.json
+htmlCache
 
 # Logs
 logs

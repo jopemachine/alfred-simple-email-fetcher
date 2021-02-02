@@ -10,7 +10,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7C917364-EAFF-46E6-A198-B23F53F2B798</string>
+				<string>B39EF3F0-C2AC-4123-B35F-A6B0BD28B018</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -37,19 +37,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>394586C1-4134-4072-9357-D41F7329EE4A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>7C917364-EAFF-46E6-A198-B23F53F2B798</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>58ED48A8-5D9B-4464-BC3E-C648D6921945</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -191,25 +178,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>./node_modules/.bin/run-node clip.js</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
+				<key>browser</key>
 				<string></string>
-				<key>type</key>
-				<integer>0</integer>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+				<key>utf8</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>7C917364-EAFF-46E6-A198-B23F53F2B798</string>
+			<string>B39EF3F0-C2AC-4123-B35F-A6B0BD28B018</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -259,27 +242,6 @@
 			<string>285FFD68-859F-4200-B433-E983D2FD1C02</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>The text on the clipboard is made into a note.</string>
-				<key>title</key>
-				<string>Clip complete</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>58ED48A8-5D9B-4464-BC3E-C648D6921945</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -456,20 +418,6 @@
 			<key>ypos</key>
 			<integer>245</integer>
 		</dict>
-		<key>58ED48A8-5D9B-4464-BC3E-C648D6921945</key>
-		<dict>
-			<key>xpos</key>
-			<integer>600</integer>
-			<key>ypos</key>
-			<integer>385</integer>
-		</dict>
-		<key>7C917364-EAFF-46E6-A198-B23F53F2B798</key>
-		<dict>
-			<key>xpos</key>
-			<integer>430</integer>
-			<key>ypos</key>
-			<integer>385</integer>
-		</dict>
 		<key>85A7370C-74C2-49BF-AA7A-4BA53E029A65</key>
 		<dict>
 			<key>xpos</key>
@@ -483,6 +431,13 @@
 			<integer>255</integer>
 			<key>ypos</key>
 			<integer>525</integer>
+		</dict>
+		<key>B39EF3F0-C2AC-4123-B35F-A6B0BD28B018</key>
+		<dict>
+			<key>xpos</key>
+			<integer>430</integer>
+			<key>ypos</key>
+			<integer>385</integer>
 		</dict>
 		<key>E20B7B34-6572-49B0-A2A2-7A74A12357FC</key>
 		<dict>
