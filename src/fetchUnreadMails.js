@@ -27,15 +27,20 @@ process.removeAllListeners('warning');
 
       const results = await imapConn.search(searchCriteria, fetchOptions)
 
-      const subjects = results.map(function (res) {
-        return res.parts.filter(function (part) {
-          return part.which === 'HEADER'
-        })[0].body.subject[0]
+      const mails = results.map(function (res) {
+        return {
+          title: config.servicePrefix
+            ? `[${account}] ` + res.parts[0].body.subject[0]
+            : res.parts[0].body.subject[0],
+          date: res.parts[0].body.date,
+          from: res.parts[0].body.from
+        }
       })
 
-      totalRecordCnts += subjects.length
+      totalRecordCnts += mails.length
 
-      unreadMails = [...unreadMails, ...subjects]
+      unreadMails = [...unreadMails, ...mails]
+
       // await imapConn.imap.closeBox(true);
       // await imapConn.end();
     })
@@ -47,25 +52,25 @@ process.removeAllListeners('warning');
       title: 'No unread emails',
       subtitle: '',
       autocomplete: '',
+      arg: '',
+      quicklookurl: '',
       text: {
         copy: '',
         largetype: ''
-      },
-      arg: '',
-      quicklookurl: ''
+      }
     })
   } else {
     result = _.map(unreadMails, (mail) => {
       return {
-        title: mail,
-        subtitle: '',
+        title: mail.title,
+        subtitle: `${mail[config.subtitle]}`,
         autocomplete: '',
+        arg: '',
+        quicklookurl: '',
         text: {
           copy: '',
           largetype: ''
-        },
-        arg: '',
-        quicklookurl: ''
+        }
       }
     })
 
@@ -73,12 +78,12 @@ process.removeAllListeners('warning');
       title: `${unreadMails.length} emails were found.`,
       subtitle: 'Press Enter on this item to mark all the below emails',
       autocomplete: '',
+      arg: '',
+      quicklookurl: '',
       text: {
         copy: '',
         largetype: ''
-      },
-      arg: '',
-      quicklookurl: ''
+      }
     })
   }
 

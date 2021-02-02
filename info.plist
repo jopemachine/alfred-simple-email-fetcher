@@ -219,7 +219,7 @@
 				<key>scriptfile</key>
 				<string>index.js</string>
 				<key>subtext</key>
-				<string>Check unread emails</string>
+				<string>Checking unread emails..</string>
 				<key>title</key>
 				<string>emc</string>
 				<key>type</key>
