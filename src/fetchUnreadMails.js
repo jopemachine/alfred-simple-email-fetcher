@@ -33,8 +33,7 @@ process.removeAllListeners('warning');
 
         const searchCriteria = ['UNSEEN']
         const fetchOptions = {
-          bodies: ['HEADER', 'TEXT', ''],
-          // bodies: ['HEADER'],
+          bodies: config.usingHtmlCache ? ['HEADER', 'TEXT', ''] : ['HEADER'],
           markSeen: config.autoMarkSeen
         }
 
@@ -54,12 +53,14 @@ process.removeAllListeners('warning');
               uid: id
             })
 
-            fs.writeFile(
-              `htmlCache/${account}/${id}.html`,
-              mail.html,
-              { encoding: 'utf-8' },
-              () => {}
-            )
+            if (config.usingHtmlCache) {
+              fs.writeFile(
+                `htmlCache/${account}/${id}.html`,
+                mail.html,
+                { encoding: 'utf-8' },
+                () => {}
+              )
+            }
           })
         })
 
@@ -126,9 +127,8 @@ process.removeAllListeners('warning');
           ? `[${mail.provider}] ` + mail.title
           : mail.title,
         subtitle,
-        autocomplete: '',
+        autocomplete: mail.title,
         arg: config.accounts[mail.provider].url,
-        // eslint-disable-next-line node/no-path-concat
         quicklookurl: `${getParentAbsolutePath()}/htmlCache/${mail.provider}/${mail.uid}.html`,
         icon: {
           path: config.accounts[mail.provider].icon
@@ -144,7 +144,9 @@ process.removeAllListeners('warning');
 
     result.splice(0, 0, {
       title: `${unreadMails.length} emails were found.`,
-      subtitle: '',
+      subtitle: `Searched through ${
+        _.filter(config.accounts, (item) => item.enabled).length
+      } providers`,
       autocomplete: '',
       arg: '',
       quicklookurl: '',
