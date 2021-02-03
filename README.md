@@ -19,13 +19,13 @@ Fetchs unseen emails through imap
 1. Install package by npm
 
 ```
-$ npm install --global alfred-multiple-emails
+$ npm install --global alfred-unseen-email-fetcher
 ```
 
 2. Run `em > config` and setup account settings
 
 3. Set the imap settings for the account you added.
-May you can refer to the [documents](https://github.com/jopemachine/alfred-multiple-emails/tree/master/documents)
+May you can refer to the [documents](https://github.com/jopemachine/alfred-unseen-email-fetcher/tree/master/documents)
 
 
 ## 📍 Configuration
