@@ -2,12 +2,12 @@ const alfy = require('alfy')
 const process = require('process')
 const imaps = require('imap-simple')
 const _ = require('lodash')
-const config = require('../config.json')
-const usageCache = require('../cache.json')
 const fs = require('fs')
 const fsPromises = fs.promises
-
 const simpleParser = require('mailparser').simpleParser
+
+const config = require('../config.json')
+const usageCache = require('../cache.json')
 const { getTimeStamp, getParentAbsolutePath } = require('./utils')
 
 // Avoids DEPTH_ZERO_SELF_SIGNED_CERT error for self-signed certs
@@ -23,60 +23,65 @@ process.removeAllListeners('warning');
   ) {
     unreadMails = usageCache.cache
   } else {
-    await Promise.all(
-      _.map(Object.keys(config.accounts), async (account) => {
-        if (!config.accounts[account].enabled) return
-        if (!fs.existsSync(`htmlCache/${account}`)) {
-          await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
-        } else {
-          await fsPromises.rmdir(`htmlCache/${account}`, { recursive: true })
-          await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
+    const targetAccounts = alfy.input
+      ? [alfy.input]
+      : _.filter(
+        Object.keys(config.accounts),
+        (account) => config.accounts[account].enabled
+      )
+
+    for (const account of targetAccounts) {
+      if (!fs.existsSync(`htmlCache/${account}`)) {
+        await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
+      } else {
+        await fsPromises.rmdir(`htmlCache/${account}`, { recursive: true })
+        await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
+      }
+
+      try {
+        const imapConn = await imaps.connect(config.accounts[account])
+        await imapConn.openBox('INBOX')
+
+        const searchCriteria = ['UNSEEN']
+        const fetchOptions = {
+          bodies: config.usingHtmlCache ? ['HEADER', 'TEXT', ''] : ['HEADER'],
+          markSeen: config.autoMarkSeen
         }
 
-        try {
-          const imapConn = await imaps.connect(config.accounts[account])
-          await imapConn.openBox('INBOX')
+        const messages = await imapConn.search(searchCriteria, fetchOptions)
 
-          const searchCriteria = ['UNSEEN']
-          const fetchOptions = {
-            bodies: config.usingHtmlCache ? ['HEADER', 'TEXT', ''] : ['HEADER'],
-            markSeen: config.autoMarkSeen
-          }
+        const mails = await Promise.all(
+          _.map(messages, async function (item) {
+            const header = _.find(item.parts, { which: 'HEADER' })
 
-          const messages = await imapConn.search(searchCriteria, fetchOptions)
+            if (config.usingHtmlCache) {
+              const all = _.find(item.parts, { which: '' })
+              const id = item.attributes.uid
+              const idHeader = 'Imap-Id: ' + id + '\r\n'
+              const parsedResult = await simpleParser(idHeader + all.body)
 
-          const mails = await Promise.all(
-            _.map(messages, async function (item) {
-              const header = _.find(item.parts, { which: 'HEADER' })
-
-              if (config.usingHtmlCache) {
-                const all = _.find(item.parts, { which: '' })
-                const id = item.attributes.uid
-                const idHeader = 'Imap-Id: ' + id + '\r\n'
-                const parsedResult = await simpleParser(idHeader + all.body)
-
-                await fsPromises.writeFile(
+              await fsPromises.writeFile(
                 `htmlCache/${account}/${id}.html`,
                 parsedResult.html,
                 { encoding: 'utf-8' }
-                )
-              }
+              )
+            }
 
-              return {
-                uid: item.attributes.uid,
-                provider: account,
-                title: header.body.subject[0],
-                from: header.body.from[0],
-                date: Number(new Date(header.body.date[0]).getTime())
-              }
-            })
-          )
+            return {
+              uid: item.attributes.uid,
+              provider: account,
+              title: header.body.subject[0],
+              from: header.body.from[0],
+              date: Number(new Date(header.body.date[0]).getTime())
+            }
+          })
+        )
 
-          unreadMails = [...unreadMails, ...mails]
+        unreadMails = [...unreadMails, ...mails]
 
-          await fsPromises.writeFile(
-            'cache.json',
-            '\ufeff' +
+        await fsPromises.writeFile(
+          'cache.json',
+          '\ufeff' +
             JSON.stringify(
               {
                 date: new Date().getTime(),
@@ -85,26 +90,25 @@ process.removeAllListeners('warning');
               null,
               2
             ),
-            { encoding: 'utf-8' }
-          )
-        } catch (err) {
-          alfy.output([
-            {
-              title: `Authentication failure in "${account}" account`,
-              subtitle: `Check smtp/imap setting on ${account} email settings`,
-              icon: {
-                path: alfy.icon.error
-              }
+          { encoding: 'utf-8' }
+        )
+      } catch (err) {
+        alfy.output([
+          {
+            title: `Authentication failure in "${account}" account`,
+            subtitle: `Check smtp/imap setting on ${account} email settings`,
+            icon: {
+              path: alfy.icon.error
             }
-          ])
-          process.exit(1)
-        }
+          }
+        ])
+        process.exit(1)
+      }
 
-        // * Not works
-        // await imapConn.imap.closeBox(true);
-        // await imapConn.end();
-      })
-    )
+      // * Not works
+      // await imapConn.imap.closeBox(true);
+      // await imapConn.end();
+    }
   }
 
   let result = []

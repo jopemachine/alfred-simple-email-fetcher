@@ -8,6 +8,19 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>00F72F91-93B9-49C1-BCF3-AE1D932E6B14</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4B58CAF7-E0C9-42C0-981D-44E4BF0796D4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0C5DA876-6E1F-4DBA-8B28-3F2202308CE4</key>
 		<array>
 			<dict>
@@ -34,11 +47,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4B58CAF7-E0C9-42C0-981D-44E4BF0796D4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D54494C5-1A9D-495D-BE21-450AD664C368</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>85A7370C-74C2-49BF-AA7A-4BA53E029A65</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>097061D9-1215-4656-A3AC-D5FE1EFB088B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AC370D95-EFA9-4318-BD0C-75A6033AC961</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>00F72F91-93B9-49C1-BCF3-AE1D932E6B14</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -61,21 +100,35 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>Fetch unseen emails</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
 				<string></string>
-				<key>spaces</key>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
 				<string></string>
-				<key>url</key>
-				<string></string>
-				<key>utf8</key>
-				<true/>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>B39EF3F0-C2AC-4123-B35F-A6B0BD28B018</string>
+			<string>0C5DA876-6E1F-4DBA-8B28-3F2202308CE4</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -129,12 +182,80 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>B39EF3F0-C2AC-4123-B35F-A6B0BD28B018</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>emp</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Fetching unread emails..</string>
+				<key>script</key>
+				<string>./node_modules/.bin/run-node src/selectProvider.js</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string>index.js</string>
+				<key>subtext</key>
+				<string>Fetch unread emails from one provider</string>
+				<key>title</key>
+				<string>emp</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>00F72F91-93B9-49C1-BCF3-AE1D932E6B14</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>Fetch unseen emails</string>
+				<string>Select provider</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -155,28 +276,73 @@
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>0C5DA876-6E1F-4DBA-8B28-3F2202308CE4</string>
+			<string>AC370D95-EFA9-4318-BD0C-75A6033AC961</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>2</integer>
-				<key>keyword</key>
-				<string>em &gt; config</string>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Fetching unread emails..</string>
+				<key>script</key>
+				<string>./node_modules/.bin/run-node src/fetchUnreadMails.js '{query}'</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string>index.js</string>
 				<key>subtext</key>
-				<string>Open the config setting file</string>
-				<key>text</key>
-				<string>em &gt; config</string>
+				<string>Fetch unread emails from one provider</string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>85A7370C-74C2-49BF-AA7A-4BA53E029A65</string>
+			<string>4B58CAF7-E0C9-42C0-981D-44E4BF0796D4</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>D54494C5-1A9D-495D-BE21-450AD664C368</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -203,45 +369,94 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>em &gt; config</string>
+				<key>subtext</key>
+				<string>Open the config setting file</string>
+				<key>text</key>
+				<string>em &gt; config</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>85A7370C-74C2-49BF-AA7A-4BA53E029A65</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>00F72F91-93B9-49C1-BCF3-AE1D932E6B14</key>
+		<dict>
+			<key>xpos</key>
+			<integer>395</integer>
+			<key>ypos</key>
+			<integer>385</integer>
+		</dict>
 		<key>097061D9-1215-4656-A3AC-D5FE1EFB088B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>500</integer>
+			<integer>580</integer>
 			<key>ypos</key>
-			<integer>355</integer>
+			<integer>525</integer>
 		</dict>
 		<key>0C5DA876-6E1F-4DBA-8B28-3F2202308CE4</key>
 		<dict>
 			<key>xpos</key>
-			<integer>150</integer>
+			<integer>225</integer>
 			<key>ypos</key>
-			<integer>215</integer>
+			<integer>240</integer>
 		</dict>
 		<key>285FFD68-859F-4200-B433-E983D2FD1C02</key>
 		<dict>
 			<key>xpos</key>
-			<integer>320</integer>
+			<integer>395</integer>
 			<key>ypos</key>
-			<integer>215</integer>
+			<integer>240</integer>
+		</dict>
+		<key>4B58CAF7-E0C9-42C0-981D-44E4BF0796D4</key>
+		<dict>
+			<key>xpos</key>
+			<integer>575</integer>
+			<key>ypos</key>
+			<integer>385</integer>
 		</dict>
 		<key>85A7370C-74C2-49BF-AA7A-4BA53E029A65</key>
 		<dict>
 			<key>xpos</key>
-			<integer>320</integer>
+			<integer>400</integer>
 			<key>ypos</key>
-			<integer>355</integer>
+			<integer>525</integer>
+		</dict>
+		<key>AC370D95-EFA9-4318-BD0C-75A6033AC961</key>
+		<dict>
+			<key>xpos</key>
+			<integer>225</integer>
+			<key>ypos</key>
+			<integer>385</integer>
 		</dict>
 		<key>B39EF3F0-C2AC-4123-B35F-A6B0BD28B018</key>
 		<dict>
 			<key>xpos</key>
-			<integer>495</integer>
+			<integer>580</integer>
 			<key>ypos</key>
-			<integer>215</integer>
+			<integer>240</integer>
+		</dict>
+		<key>D54494C5-1A9D-495D-BE21-450AD664C368</key>
+		<dict>
+			<key>xpos</key>
+			<integer>740</integer>
+			<key>ypos</key>
+			<integer>385</integer>
 		</dict>
 	</dict>
 	<key>webaddress</key>

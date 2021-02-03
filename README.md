@@ -162,6 +162,12 @@ you could find out `host` value in your account's imap setting page.
 
 Fetch and show emails on `UNSEEN` state from registered accounts.
 
+### emp
+
+Select one provider and fetch only the account's unseen emails.
+
+You can fetch emails which account's `enabled` is false by this method.
+
 ### em > config
 
 Open the `config.json` file through your editor.
