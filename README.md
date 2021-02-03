@@ -158,7 +158,7 @@ you could find out `host` value in your account's imap setting page.
 
 ## 📗 How to use
 
-### ems { Argument }
+### ems
 
 Fetch and show emails on `UNSEEN` state from registered accounts.
 
