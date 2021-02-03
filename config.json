@@ -1,0 +1,49 @@
+{
+    "autoMarkSeen": true,
+    "providerPrefix": false,
+    "subtitle": "date-from",
+    "cacheDuration": 30000,
+    "sorting": "provider-timeDesc",
+    "usingHtmlCache": false,
+    "accounts": {
+        "google": {
+            "url": "https://mail.google.com/mail/",
+            "enabled": false,
+            "icon": "google.png",
+            "imap": {
+                "user": "",
+                "password": "",
+                "host": "imap.gmail.com",
+                "port": 993,
+                "tls": true,
+                "authTimeout": 3000
+            }
+        },
+        "naver": {
+            "url": "https://mail.naver.com/",
+            "enabled": false,
+            "icon": "naver.png",
+            "imap": {
+                "user": "",
+                "password": "",
+                "host": "imap.naver.com",
+                "port": 993,
+                "tls": true,
+                "authTimeout": 3000
+            }
+        },
+        "daum": {
+            "url": "https://mail.daum.net/",
+            "enabled": false,
+            "icon": "daum.png",
+            "imap": {
+                "user": "",
+                "password": "",
+                "host": "imap.daum.net",
+                "port": 993,
+                "tls": true,
+                "authTimeout": 3000
+            }
+        }
+    }
+}
