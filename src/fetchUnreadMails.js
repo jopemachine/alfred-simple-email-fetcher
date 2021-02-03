@@ -33,50 +33,50 @@ process.removeAllListeners('warning');
           await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
         }
 
-        const imapConn = await imaps.connect(config.accounts[account])
-        await imapConn.openBox('INBOX')
+        try {
+          const imapConn = await imaps.connect(config.accounts[account])
+          await imapConn.openBox('INBOX')
 
-        const searchCriteria = ['UNSEEN']
-        const fetchOptions = {
-          bodies: config.usingHtmlCache ? ['HEADER', 'TEXT', ''] : ['HEADER'],
-          markSeen: config.autoMarkSeen
-        }
+          const searchCriteria = ['UNSEEN']
+          const fetchOptions = {
+            bodies: config.usingHtmlCache ? ['HEADER', 'TEXT', ''] : ['HEADER'],
+            markSeen: config.autoMarkSeen
+          }
 
-        const messages = await imapConn.search(searchCriteria, fetchOptions)
+          const messages = await imapConn.search(searchCriteria, fetchOptions)
 
-        const mails = await Promise.all(
-          _.map(messages, async function (item) {
-            const header = _.find(item.parts, { which: 'HEADER' })
+          const mails = await Promise.all(
+            _.map(messages, async function (item) {
+              const header = _.find(item.parts, { which: 'HEADER' })
 
-            if (config.usingHtmlCache) {
-              const all = _.find(item.parts, { which: '' })
-              const id = item.attributes.uid
-              const idHeader = 'Imap-Id: ' + id + '\r\n'
-              const parsedResult = await simpleParser(idHeader + all.body)
+              if (config.usingHtmlCache) {
+                const all = _.find(item.parts, { which: '' })
+                const id = item.attributes.uid
+                const idHeader = 'Imap-Id: ' + id + '\r\n'
+                const parsedResult = await simpleParser(idHeader + all.body)
 
-              await fsPromises.writeFile(
+                await fsPromises.writeFile(
                 `htmlCache/${account}/${id}.html`,
                 parsedResult.html,
-                { encoding: 'utf-8' },
-                () => {}
-              )
-            }
+                { encoding: 'utf-8' }
+                )
+              }
 
-            return {
-              uid: item.attributes.uid,
-              provider: account,
-              title: header.body.subject[0],
-              from: header.body.from[0],
-              date: Number(new Date(header.body.date[0]).getTime())
-            }
-          })
-        )
+              return {
+                uid: item.attributes.uid,
+                provider: account,
+                title: header.body.subject[0],
+                from: header.body.from[0],
+                date: Number(new Date(header.body.date[0]).getTime())
+              }
+            })
+          )
 
-        unreadMails = [...unreadMails, ...mails]
+          unreadMails = [...unreadMails, ...mails]
 
-        await fsPromises.writeFile(
-          'cache.json',
-          '\ufeff' +
+          await fsPromises.writeFile(
+            'cache.json',
+            '\ufeff' +
             JSON.stringify(
               {
                 date: new Date().getTime(),
@@ -85,10 +85,22 @@ process.removeAllListeners('warning');
               null,
               2
             ),
-          { encoding: 'utf-8' },
-          () => {}
-        )
+            { encoding: 'utf-8' }
+          )
+        } catch (err) {
+          alfy.output([
+            {
+              title: `Authentication failure in "${account}" account`,
+              subtitle: `Check smtp/imap setting on ${account} email settings`,
+              icon: {
+                path: alfy.icon.error
+              }
+            }
+          ])
+          process.exit(1)
+        }
 
+        // * Not works
         // await imapConn.imap.closeBox(true);
         // await imapConn.end();
       })
@@ -104,7 +116,7 @@ process.removeAllListeners('warning');
         largetype: 'No unseen emails'
       },
       icon: {
-        path: './icons/empty.png'
+        path: alfy.icon.info
       }
     })
   } else {
@@ -112,19 +124,19 @@ process.removeAllListeners('warning');
       case 'subject':
         unreadMails = _.sortBy(unreadMails, ['title']).reverse()
         break
-      case 'providerAndSubject':
+      case 'provider-subject':
         unreadMails = _.sortBy(unreadMails, ['provider', 'title']).reverse()
         break
       case 'timeDesc':
         unreadMails = _.sortBy(unreadMails, ['date']).reverse()
         break
-      case 'providerAndTimeDesc':
+      case 'provider-timeDesc':
         unreadMails = _.sortBy(unreadMails, ['provider', 'date']).reverse()
         break
       case 'timeAsec':
         unreadMails = _.sortBy(unreadMails, ['date'])
         break
-      case 'providerAndTimeAsec':
+      case 'provider-timeAsec':
         unreadMails = _.sortBy(unreadMails, ['provider', 'date'])
         break
       default:
@@ -135,8 +147,12 @@ process.removeAllListeners('warning');
       let subtitle = ''
       if (config.subtitle === 'date') {
         subtitle = getTimeStamp(new Date(mail.date))
+      } else if (config.subtitle === 'date-from') {
+        subtitle = `${getTimeStamp(new Date(mail.date))}, from ${mail.from}`
+      } else if (config.subtitle === 'from-date') {
+        subtitle = `${mail.from}, in ${getTimeStamp(new Date(mail.date))}`
       } else {
-        subtitle = `${mail[config.subtitle]}`
+        subtitle = `${mail.from}`
       }
 
       return {
@@ -152,7 +168,7 @@ process.removeAllListeners('warning');
         icon: {
           path: config.accounts[mail.provider].icon
             ? `./icons/${config.accounts[mail.provider].icon}`
-            : './icons/default.png'
+            : './icon.png'
         },
         text: {
           copy: mail.title,

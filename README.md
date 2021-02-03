@@ -25,7 +25,7 @@ $ npm install --global alfred-multiple-emails
 2. Run `em > config` and setup account settings
 
 3. Set the imap settings for the account you added.
-You can refer to the [documents](https://github.com/jopemachine/alfred-multiple-emails/tree/master/documents)
+May you can refer to the [documents](https://github.com/jopemachine/alfred-multiple-emails/tree/master/documents)
 
 
 ## 📍 Configuration
@@ -36,9 +36,9 @@ You can configure detailed settings by editing your `config.json`.
 {
     "autoMarkSeen": false,
     "providerPrefix": true,
-    "subtitle": "date",
+    "subtitle": "date-from",
     "cacheDuration": false,
-    "sorting": "providerAndTime",
+    "sorting": "provider-timedesc",
     "usingHtmlCache": true,
     "accounts": {
         "google": {
@@ -47,7 +47,7 @@ You can configure detailed settings by editing your `config.json`.
             "icon": "google.png",
             "imap": {
                 "user": "user@gmail.com",
-                "password": "some_password",
+                "password": "account_password",
                 "host": "imap.gmail.com",
                 "port": 993,
                 "tls": true,
@@ -60,7 +60,7 @@ You can configure detailed settings by editing your `config.json`.
             "icon": "naver.png",
             "imap": {
                 "user": "user@naver.com",
-                "password": "some_password",
+                "password": "account_password",
                 "host": "imap.naver.com",
                 "port": 993,
                 "tls": true,
@@ -86,13 +86,13 @@ Append email provider name to email record.
 
 Type: `String (enum)`
 
-`date` or `from`.
+`date` or `from` or `date-from` or `from-date`
 
 ### cacheDuration
 
 Type: `Number | Boolean`
 
-set cache period.
+set cache period (ms)
 
 To not use caching, set this value to `false`
 
@@ -103,11 +103,11 @@ Type: `String (enum)`
 Sorts and returns search results.
 
 * `subject` (mail title)
-* `providerAndSubject` (sort provider first and subject)
+* `provider-subject` (sort provider first and subject)
 * `timeDesc` (recent email first)
 * `timeAsec` (old email first)
-* `providerAndTimeAsec`
-* `providerAndTimeDesc`
+* `provider-timeAsec`
+* `provider-timeDesc`
 
 ### usingHtmlCache
 
@@ -151,11 +151,14 @@ Type: `Object`
 
 imap configuration object used by [imap-simple](https://github.com/chadxz/imap-simple).
 
+imap's default port value is `993`.
+
+you could find out `host` value in your account's imap setting page.
 
 
 ## 📗 How to use
 
-### emu { Argument }
+### ems { Argument }
 
 Fetch and show emails on `UNSEEN` state from registered accounts.
 
