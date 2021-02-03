@@ -29,6 +29,8 @@
     "icons/*.png",
     "demo.png",
     "documents/*.md",
+    "cache.json",
+    "config.json",
     "LICENSE"
   ],
   "dependencies": {
