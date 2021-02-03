@@ -1,7 +1,6 @@
 # ✉️ alfred-unseen-email-fetcher
 
-<img src="https://img.shields.io/badge/Alfred-4-blueviolet" />
-<img src="https://img.shields.io/github/license/jopemachine/alfred-unseen-email-fetcher.svg" alt="License">
+<img src="https://img.shields.io/badge/Alfred-4-blueviolet"> <img src="https://img.shields.io/github/license/jopemachine/alfred-unseen-email-fetcher.svg" alt="License">
 
 Fetchs unseen emails through imap
 
