@@ -1,8 +1,8 @@
-# ✉️ alfred-unseen-email-fetcher
+# ✉️ alfred-simple-email-fetcher
 
-<img src="https://img.shields.io/badge/Alfred-4-blueviolet"> <img src="https://img.shields.io/github/license/jopemachine/alfred-unseen-email-fetcher.svg" alt="License">
+<img src="https://img.shields.io/badge/Alfred-4-blueviolet"> <img src="https://img.shields.io/github/license/jopemachine/alfred-simple-email-fetcher.svg" alt="License">
 
-Fetchs unseen emails through imap
+Just fetch and show emails through imap
 
 <p align="center">
 <img src="./demo.png">
@@ -19,13 +19,13 @@ Fetchs unseen emails through imap
 1. Install package by npm
 
 ```
-$ npm install --global alfred-unseen-email-fetcher
+$ npm install --global alfred-simple-email-fetcher
 ```
 
 2. Run `em > config` and setup account settings
 
 3. Set the imap settings for the account you added.
-May you can refer to the [documents](https://github.com/jopemachine/alfred-unseen-email-fetcher/tree/master/documents)
+May you can refer to the [documents](https://github.com/jopemachine/alfred-simple-email-fetcher/tree/master/documents)
 
 
 ## 📍 Configuration
@@ -158,15 +158,39 @@ you could find out `host` value in your account's imap setting page.
 
 ## 📗 How to use
 
-### ems
+### emu
 
 Fetch and show emails on `UNSEEN` state from registered accounts.
 
-### emp
+### emau
 
-Select one provider and fetch only the account's unseen emails.
+Select one provider and fetch only the account's `UNSEEN` emails.
 
 You can fetch emails which account's `enabled` is false by this method.
+
+### emd
+
+Fetch and show emails on `DRAFT` state from registered accounts.
+
+### emad
+
+Select one provider and fetch only the account's `DRAFT` emails.
+
+### emf
+
+Fetch and show emails on `FLAGGED` state from registered accounts.
+
+### emaf
+
+Select one provider and fetch only the account's `FLAGGED` emails.
+
+### emans
+
+Fetch and show emails on `ANSWERED` state from registered accounts.
+
+### emaans
+
+Select one provider and fetch only the account's `ANSWERED` emails.
 
 ### em > config
 

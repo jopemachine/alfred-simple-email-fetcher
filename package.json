@@ -1,7 +1,7 @@
 {
-  "name": "alfred-unseen-email-fetcher",
-  "version": "0.0.3",
-  "description": "Alfred workflow that fetchs unseen emails from multiple accounts using imap",
+  "name": "alfred-simple-email-fetcher",
+  "version": "0.0.5",
+  "description": "Alfred workflow that fetch and show emails from multiple accounts using imap",
   "scripts": {
     "lint": "eslint src",
     "postinstall": "alfy-init",
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jopemachine/alfred-unseen-email-fetcher.git"
+    "url": "git+https://github.com/jopemachine/alfred-simple-email-fetcher.git"
   },
   "bugs": {
-    "url": "https://github.com/jopemachine/alfred-unseen-email-fetcher/issues"
+    "url": "https://github.com/jopemachine/alfred-simple-email-fetcher/issues"
   },
   "author": "jopemachine",
   "license": "MIT",

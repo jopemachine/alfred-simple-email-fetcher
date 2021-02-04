@@ -12,10 +12,22 @@ const { getTimeStamp, getParentAbsolutePath } = require('./utils')
 
 // Avoids DEPTH_ZERO_SELF_SIGNED_CERT error for self-signed certs
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-process.removeAllListeners('warning');
+process.removeAllListeners('warning')
+
+const searchCriteria = [process.argv[2]]
+const accountsArg = process.argv[3];
 
 (async function () {
   let unreadMails = []
+
+  const targetAccounts = accountsArg
+    ? accountsArg.includes(',')
+      ? accountsArg.split(',')
+      : [accountsArg]
+    : _.filter(
+      Object.keys(config.accounts),
+      (account) => config.accounts[account].enabled
+    )
 
   if (
     config.cacheDuration !== false &&
@@ -23,13 +35,6 @@ process.removeAllListeners('warning');
   ) {
     unreadMails = usageCache.cache
   } else {
-    const targetAccounts = alfy.input
-      ? [alfy.input]
-      : _.filter(
-        Object.keys(config.accounts),
-        (account) => config.accounts[account].enabled
-      )
-
     for (const account of targetAccounts) {
       if (!fs.existsSync(`htmlCache/${account}`)) {
         await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
@@ -42,7 +47,6 @@ process.removeAllListeners('warning');
         const imapConn = await imaps.connect(config.accounts[account])
         await imapConn.openBox('INBOX')
 
-        const searchCriteria = ['UNSEEN']
         const fetchOptions = {
           bodies: config.usingHtmlCache ? ['HEADER', 'TEXT', ''] : ['HEADER'],
           markSeen: config.autoMarkSeen
@@ -111,18 +115,20 @@ process.removeAllListeners('warning');
     }
   }
 
-  let result = []
+  let result
+
   if (unreadMails.length === 0) {
-    result.push({
-      title: 'No unseen emails',
+    result = [{
+      title: `No ${searchCriteria[0].toLowerCase()} emails`,
+      subtitle: `Searched through ${targetAccounts.length} providers`,
       text: {
-        copy: 'No unseen emails',
-        largetype: 'No unseen emails'
+        copy: `No ${searchCriteria[0].toLowerCase()} emails`,
+        largetype: `No ${searchCriteria[0].toLowerCase()} emails`
       },
       icon: {
         path: alfy.icon.info
       }
-    })
+    }]
   } else {
     switch (config.sorting) {
       case 'subject':
@@ -147,47 +153,9 @@ process.removeAllListeners('warning');
         break
     }
 
-    result = _.map(unreadMails, (mail) => {
-      let subtitle = ''
-      if (config.subtitle === 'date') {
-        subtitle = getTimeStamp(new Date(mail.date))
-      } else if (config.subtitle === 'date-from') {
-        subtitle = `${getTimeStamp(new Date(mail.date))}, from ${mail.from}`
-      } else if (config.subtitle === 'from-date') {
-        subtitle = `${mail.from}, in ${getTimeStamp(new Date(mail.date))}`
-      } else {
-        subtitle = `${mail.from}`
-      }
-
-      return {
-        title: config.providerPrefix
-          ? `[${mail.provider}] ` + mail.title
-          : mail.title,
-        subtitle,
-        autocomplete: mail.title,
-        arg: config.accounts[mail.provider].url,
-        quicklookurl: `${getParentAbsolutePath()}/htmlCache/${mail.provider}/${
-          mail.uid
-        }.html`,
-        icon: {
-          path: config.accounts[mail.provider].icon
-            ? `./icons/${config.accounts[mail.provider].icon}`
-            : './icon.png'
-        },
-        text: {
-          copy: mail.title,
-          largetype: mail.title
-        }
-      }
-    })
-
-    result.splice(0, 0, {
+    const mailCounter = {
       title: `${unreadMails.length} emails were found.`,
-      subtitle: `Searched through ${
-        alfy.input
-          ? config.accounts[alfy.input].imap.user
-          : _.filter(config.accounts, (item) => item.enabled).length
-      } providers`,
+      subtitle: `Searched through ${targetAccounts.length} providers`,
       autocomplete: `${unreadMails.length}`,
       arg: '',
       quicklookurl: '',
@@ -195,7 +163,55 @@ process.removeAllListeners('warning');
         copy: `${unreadMails.length} emails were found.`,
         largetype: `${unreadMails.length} emails were found.`
       }
-    })
+    }
+
+    result = [
+      mailCounter,
+      ..._.map(unreadMails, (mail) => {
+        let subtitle = ''
+        if (config.subtitle === 'date') {
+          subtitle = getTimeStamp(new Date(mail.date))
+        } else if (config.subtitle === 'date-from') {
+          subtitle = `${getTimeStamp(new Date(mail.date))}, from ${mail.from}`
+        } else if (config.subtitle === 'from-date') {
+          subtitle = `${mail.from}, in ${getTimeStamp(new Date(mail.date))}`
+        } else {
+          subtitle = `${mail.from}`
+        }
+
+        return {
+          title: config.providerPrefix
+            ? `[${mail.provider}] ` + mail.title
+            : mail.title,
+          subtitle,
+          autocomplete: mail.title,
+          arg: config.accounts[mail.provider].url,
+          quicklookurl: `${getParentAbsolutePath()}/htmlCache/${
+            mail.provider
+          }/${mail.uid}.html`,
+          icon: {
+            path: config.accounts[mail.provider].icon
+              ? `./icons/${config.accounts[mail.provider].icon}`
+              : './icon.png'
+          },
+          text: {
+            copy: mail.title,
+            largetype: mail.title
+          }
+        }
+      })
+    ]
+
+    accountsArg &&
+      result.splice(0, 0, {
+        title: 'Back',
+        subtitle: 'Back to selector',
+        autocomplete: 'Back',
+        arg: 'back',
+        icon: {
+          path: './icons/back-button.png'
+        }
+      })
   }
 
   alfy.output(result)
