@@ -1,6 +1,6 @@
 {
   "name": "alfred-unseen-email-fetcher",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Alfred workflow that fetchs unseen emails from multiple accounts using imap",
   "scripts": {
     "lint": "eslint src",

@@ -184,7 +184,9 @@ process.removeAllListeners('warning');
     result.splice(0, 0, {
       title: `${unreadMails.length} emails were found.`,
       subtitle: `Searched through ${
-        _.filter(config.accounts, (item) => item.enabled).length
+        alfy.input
+          ? config.accounts[alfy.input].imap.user
+          : _.filter(config.accounts, (item) => item.enabled).length
       } providers`,
       autocomplete: `${unreadMails.length}`,
       arg: '',
