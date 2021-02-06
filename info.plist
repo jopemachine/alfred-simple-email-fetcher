@@ -387,7 +387,7 @@
 	<key>description</key>
 	<string>Alfred workflow that fetchs emails from multiple accounts</string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>alfred-simple-email-fetcher</string>
 	<key>objects</key>
@@ -1665,7 +1665,7 @@
 			<key>xpos</key>
 			<integer>555</integer>
 			<key>ypos</key>
-			<integer>1680</integer>
+			<integer>1495</integer>
 		</dict>
 		<key>0C5DA876-6E1F-4DBA-8B28-3F2202308CE4</key>
 		<dict>
@@ -1805,7 +1805,7 @@
 			<key>xpos</key>
 			<integer>375</integer>
 			<key>ypos</key>
-			<integer>1680</integer>
+			<integer>1495</integer>
 		</dict>
 		<key>88A35176-5530-4C2E-A6F3-64A1755CF5BB</key>
 		<dict>

@@ -121,9 +121,7 @@ Type: `Array of object`
 
 You can register multiple email accounts.
 
-This workflow create one imap connection per each account,
-
-so, if you connect too many accounts or there are too many emails to fetch, response will slow down.
+This workflow use `worker_thread` at each imap connection.
 
 #### url
 

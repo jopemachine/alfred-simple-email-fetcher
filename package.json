@@ -1,6 +1,6 @@
 {
   "name": "alfred-simple-email-fetcher",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Alfred workflow that fetch and show emails from multiple accounts using imap",
   "scripts": {
     "lint": "eslint src",
