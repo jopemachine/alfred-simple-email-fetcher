@@ -42,7 +42,6 @@ You can configure detailed settings by editing your `config.json`.
     "usingHtmlCache": true,
     "accounts": {
         "google": {
-            "url": "https://mail.google.com/mail/",
             "enabled": true,
             "icon": "google.png",
             "imap": {
@@ -55,7 +54,6 @@ You can configure detailed settings by editing your `config.json`.
             }
         },
         "naver": {
-            "url": "https://mail.naver.com/",
             "enabled": true,
             "icon": "naver.png",
             "imap": {
@@ -123,12 +121,6 @@ You can register multiple email accounts.
 
 This workflow use `worker_thread` at each imap connection.
 
-#### url
-
-Type: `String`
-
-open this url when press enter on the email record.
-
 #### enabled
 
 Type: `Boolean`
@@ -159,6 +151,8 @@ you could find out `host` value in your account's imap setting page.
 ### emu
 
 Fetch and show emails on `UNSEEN` state from registered accounts.
+
+Tap Enter to open your mail with the `Mail` app.
 
 ### emau
 

@@ -7,7 +7,6 @@
     "usingHtmlCache": false,
     "accounts": {
         "google": {
-            "url": "https://mail.google.com/mail/",
             "enabled": false,
             "icon": "google.png",
             "imap": {
@@ -20,7 +19,6 @@
             }
         },
         "naver": {
-            "url": "https://mail.naver.com/",
             "enabled": false,
             "icon": "naver.png",
             "imap": {
@@ -33,7 +31,6 @@
             }
         },
         "daum": {
-            "url": "https://mail.daum.net/",
             "enabled": false,
             "icon": "daum.png",
             "imap": {

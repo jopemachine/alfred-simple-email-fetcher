@@ -25,7 +25,20 @@ const targetAccounts = accountsArg
   : _.filter(
     Object.keys(config.accounts),
     (account) => config.accounts[account].enabled
-  );
+  )
+
+if (targetAccounts.length === 0) {
+  alfy.output([
+    {
+      title: 'First, setup your config.json file',
+      subtitle: 'you can use \'em > config\'',
+      icon: {
+        path: alfy.icon.info
+      }
+    }
+  ])
+  process.exit(1)
+}
 
 (async function () {
   if (
@@ -60,7 +73,6 @@ const targetAccounts = accountsArg
 
 async function mainThreadCallback () {
   let result
-
   if (unreadMails.length === 0) {
     result = [
       {
@@ -145,7 +157,7 @@ async function mainThreadCallback () {
             : mail.title,
           subtitle,
           autocomplete: mail.title,
-          arg: config.accounts[mail.provider].url,
+          arg: mail.mailId,
           quicklookurl: `${getParentAbsolutePath()}/htmlCache/${
             mail.provider
           }/${mail.uid}.html`,

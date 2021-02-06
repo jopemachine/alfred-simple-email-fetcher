@@ -16,5 +16,9 @@ module.exports = {
     const seconds = ('0' + date.getSeconds()).substr(-2)
 
     return year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds
+  },
+
+  unbracket (str) {
+    return str.substr(1, str.length - 2)
   }
 }
