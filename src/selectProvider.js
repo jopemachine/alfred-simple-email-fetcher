@@ -13,7 +13,7 @@ const showAllAccounts = {
 
 alfy.output([
   showAllAccounts,
-  ..._.map(Object.keys(config.accounts), (account) => {
+  ...(_.map(Object.keys(config.accounts), (account) => {
     return {
       title: account,
       subtitle: `${config.accounts[account].imap.user}`,
@@ -27,5 +27,5 @@ alfy.output([
         largetype: account
       }
     }
-  })
+  }).reverse())
 ])

@@ -2,7 +2,7 @@
 
 <img src="https://img.shields.io/badge/Alfred-4-blueviolet"> <img src="https://img.shields.io/github/license/jopemachine/alfred-simple-email-fetcher.svg" alt="License">
 
-Just fetch and show emails through imap
+Fetch and show emails through imap
 
 <p align="center">
 <img src="./demo.png">
@@ -111,7 +111,7 @@ Sorts and returns search results.
 
 Type: `Boolean`
 
-save and use html cache for quicklook feature
+Download emails by html file.
 
 ### accounts
 
@@ -119,21 +119,21 @@ Type: `Array of object`
 
 You can register multiple email accounts.
 
-This workflow use `worker_thread` at each imap connection.
+this workflow use `worker_thread` at each imap connection.
 
 #### enabled
 
 Type: `Boolean`
 
-if this value is false, skip this account
+If this value is false, this account is ignored.
 
 #### icon
 
 Type: `String`
 
-show this icon on this account's emails.
+Show this icon on this account's emails.
 
-icon files should be placed within `icons` folder. 
+icon files should be placed within `icons` folder.
 
 #### imap
 
@@ -151,8 +151,6 @@ you could find out `host` value in your account's imap setting page.
 ### emu
 
 Fetch and show emails on `UNSEEN` state from registered accounts.
-
-Tap Enter to open your mail with the `Mail` app.
 
 ### emau
 
@@ -188,3 +186,6 @@ Select one provider and fetch only the account's `ANSWERED` emails.
 
 Open the `config.json` file through your editor.
 
+### em > clearcache
+
+Clean all saved html cache.

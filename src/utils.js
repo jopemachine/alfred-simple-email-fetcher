@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 
 module.exports = {
   getParentAbsolutePath () {
@@ -20,5 +21,12 @@ module.exports = {
 
   unbracket (str) {
     return str.substr(1, str.length - 2)
+  },
+
+  async checkFileExists (file) {
+    return fs.promises
+      .access(file, fs.constants.F_OK)
+      .then(() => true)
+      .catch(() => false)
   }
 }

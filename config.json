@@ -4,7 +4,7 @@
     "subtitle": "date-from",
     "cacheDuration": 30000,
     "sorting": "provider-timeDesc",
-    "usingHtmlCache": false,
+    "usingHtmlCache": true,
     "accounts": {
         "google": {
             "enabled": false,

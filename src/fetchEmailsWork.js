@@ -6,22 +6,16 @@ const config = require('../config.json')
 const simpleParser = require('mailparser').simpleParser
 const alfy = require('alfy')
 const _ = require('lodash')
-const { unbracket } = require('./utils')
+const { unbracket, checkFileExists } = require('./utils')
 
 const process = require('process')
 // Avoids DEPTH_ZERO_SELF_SIGNED_CERT error for self-signed certs
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 process.removeAllListeners('warning')
 
+// Execute this work on each account
 if (!isMainThread) {
   parentPort.on('message', async ({ account, searchCriteria }) => {
-    if (!fs.existsSync(`htmlCache/${account}`)) {
-      await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
-    } else {
-      await fsPromises.rmdir(`htmlCache/${account}`, { recursive: true })
-      await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
-    }
-
     try {
       const imapConn = await imaps.connect(config.accounts[account])
       await imapConn.openBox('INBOX')
@@ -33,6 +27,10 @@ if (!isMainThread) {
 
       const messages = await imapConn.search(searchCriteria, fetchOptions)
 
+      if (!fs.existsSync(`htmlCache/${account}`)) {
+        await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
+      }
+
       const mails = await Promise.all(
         _.map(messages, async function (item) {
           const header = _.find(item.parts, { which: 'HEADER' })
@@ -43,12 +41,15 @@ if (!isMainThread) {
             const id = item.attributes.uid
             const idHeader = 'Imap-Id: ' + id + '\r\n'
             const parsedResult = await simpleParser(idHeader + all.body)
+            const htmlCacheFileName = `htmlCache/${account}/${id}.html`
 
-            await fsPromises.writeFile(
-              `htmlCache/${account}/${id}.html`,
-              parsedResult.html,
-              { encoding: 'utf-8' }
-            )
+            if ((await checkFileExists(htmlCacheFileName)) === false) {
+              await fsPromises.writeFile(
+                htmlCacheFileName,
+                parsedResult.html,
+                { encoding: 'utf-8' }
+              )
+            }
           }
 
           return {

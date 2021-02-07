@@ -157,7 +157,9 @@ async function mainThreadCallback () {
             : mail.title,
           subtitle,
           autocomplete: mail.title,
-          arg: mail.mailId,
+          arg: `${getParentAbsolutePath()}/htmlCache/${
+            mail.provider
+          }/${mail.uid}.html`,
           quicklookurl: `${getParentAbsolutePath()}/htmlCache/${
             mail.provider
           }/${mail.uid}.html`,

@@ -50,7 +50,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>D940D852-4AC5-4000-9D54-5782443AE5AD</string>
+				<string>AC2F12FC-9B58-4B0F-9DF5-F4FE5CAC71B1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -76,7 +76,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>060BAA21-1F3F-46E6-9825-144EA98BE527</string>
+				<string>505E48EB-944A-43A5-A2B1-1EC4D59E1B12</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -128,7 +128,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F8B7B27F-4876-4451-A6C3-63ED0E81DE7F</string>
+				<string>C6F247D9-4067-4EA5-83FB-7BC5C2FB4CDE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -180,7 +180,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>23CCA9A3-E620-4657-AD98-95362C2ADB22</string>
+				<string>EAD4440D-52FA-482C-B08D-4E21C7A17067</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -244,7 +244,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>2BAF944E-10AE-4028-A577-3AE47DD71224</string>
+				<string>3ACBDAC7-11BE-4DDF-9AF3-CB4AD32B290D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -270,7 +270,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FB271372-6D90-4F14-9343-BB1BBB751DD5</string>
+				<string>E19B6894-2D57-4949-823E-DD6B0B691124</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -284,6 +284,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>00F72F91-93B9-49C1-BCF3-AE1D932E6B14</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AE1EE4E2-94AB-4F46-8023-1074756E13DE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>254A0A16-472F-4BBA-870A-633538C7760D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -334,7 +347,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>CE1FA8B1-4DD0-45AC-A783-21781EE272DB</string>
+				<string>DC99DA30-639C-4ABA-9461-1D5A4E3E3E39</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -372,7 +385,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>C831F248-3D91-482C-913E-F4BB4D0BE114</string>
+				<string>EEDA9813-78C8-43AC-922B-A253413C2E3E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -392,29 +405,6 @@
 	<string>alfred-simple-email-fetcher</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>osascript src/openMailById.scpt {query}</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>060BAA21-1F3F-46E6-9825-144EA98BE527</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -447,6 +437,25 @@
 			<string>0C5DA876-6E1F-4DBA-8B28-3F2202308CE4</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>file://{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>505E48EB-944A-43A5-A2B1-1EC4D59E1B12</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -683,25 +692,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>osascript src/openMailById.scpt {query}</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
+				<key>browser</key>
 				<string></string>
-				<key>type</key>
-				<integer>0</integer>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>file://{query}</string>
+				<key>utf8</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>D940D852-4AC5-4000-9D54-5782443AE5AD</string>
+			<string>AC2F12FC-9B58-4B0F-9DF5-F4FE5CAC71B1</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -755,25 +760,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>osascript src/openMailById.scpt {query}</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
+				<key>browser</key>
 				<string></string>
-				<key>type</key>
-				<integer>0</integer>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>file://{query}</string>
+				<key>utf8</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>FB271372-6D90-4F14-9343-BB1BBB751DD5</string>
+			<string>E19B6894-2D57-4949-823E-DD6B0B691124</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -994,25 +995,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>osascript src/openMailById.scpt {query}</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
+				<key>browser</key>
 				<string></string>
-				<key>type</key>
-				<integer>0</integer>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>file://{query}</string>
+				<key>utf8</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>CE1FA8B1-4DD0-45AC-A783-21781EE272DB</string>
+			<string>DC99DA30-639C-4ABA-9461-1D5A4E3E3E39</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1050,25 +1047,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>osascript src/openMailById.scpt {query}</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
+				<key>browser</key>
 				<string></string>
-				<key>type</key>
-				<integer>0</integer>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>file://{query}</string>
+				<key>utf8</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>F8B7B27F-4876-4451-A6C3-63ED0E81DE7F</string>
+			<string>C6F247D9-4067-4EA5-83FB-7BC5C2FB4CDE</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1305,25 +1298,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>osascript src/openMailById.scpt {query}</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
+				<key>browser</key>
 				<string></string>
-				<key>type</key>
-				<integer>0</integer>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>file://{query}</string>
+				<key>utf8</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>C831F248-3D91-482C-913E-F4BB4D0BE114</string>
+			<string>EEDA9813-78C8-43AC-922B-A253413C2E3E</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1377,25 +1366,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>osascript src/openMailById.scpt {query}</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
+				<key>browser</key>
 				<string></string>
-				<key>type</key>
-				<integer>0</integer>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>file://{query}</string>
+				<key>utf8</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>23CCA9A3-E620-4657-AD98-95362C2ADB22</string>
+			<string>EAD4440D-52FA-482C-B08D-4E21C7A17067</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1616,25 +1601,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>osascript src/openMailById.scpt {query}</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
+				<key>browser</key>
 				<string></string>
-				<key>type</key>
-				<integer>0</integer>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>file://{query}</string>
+				<key>utf8</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>2BAF944E-10AE-4028-A577-3AE47DD71224</string>
+			<string>3ACBDAC7-11BE-4DDF-9AF3-CB4AD32B290D</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1680,6 +1661,50 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./node_modules/.bin/run-node src/clearHtmlCache.js</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>254A0A16-472F-4BBA-870A-633538C7760D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>em &gt; clearcache</string>
+				<key>subtext</key>
+				<string>Clear html cache</string>
+				<key>text</key>
+				<string>em &gt; clearcache</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>AE1EE4E2-94AB-4F46-8023-1074756E13DE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -1691,13 +1716,6 @@
 			<integer>390</integer>
 			<key>ypos</key>
 			<integer>325</integer>
-		</dict>
-		<key>060BAA21-1F3F-46E6-9825-144EA98BE527</key>
-		<dict>
-			<key>xpos</key>
-			<integer>565</integer>
-			<key>ypos</key>
-			<integer>180</integer>
 		</dict>
 		<key>097061D9-1215-4656-A3AC-D5FE1EFB088B</key>
 		<dict>
@@ -1734,12 +1752,12 @@
 			<key>ypos</key>
 			<integer>1015</integer>
 		</dict>
-		<key>23CCA9A3-E620-4657-AD98-95362C2ADB22</key>
+		<key>254A0A16-472F-4BBA-870A-633538C7760D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>560</integer>
+			<integer>555</integer>
 			<key>ypos</key>
-			<integer>1180</integer>
+			<integer>1630</integer>
 		</dict>
 		<key>285FFD68-859F-4200-B433-E983D2FD1C02</key>
 		<dict>
@@ -1762,19 +1780,19 @@
 			<key>ypos</key>
 			<integer>1015</integer>
 		</dict>
-		<key>2BAF944E-10AE-4028-A577-3AE47DD71224</key>
-		<dict>
-			<key>xpos</key>
-			<integer>795</integer>
-			<key>ypos</key>
-			<integer>1390</integer>
-		</dict>
 		<key>36361657-F2C3-46BC-BFAA-0F0E643AFE4F</key>
 		<dict>
 			<key>xpos</key>
 			<integer>210</integer>
 			<key>ypos</key>
 			<integer>545</integer>
+		</dict>
+		<key>3ACBDAC7-11BE-4DDF-9AF3-CB4AD32B290D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>795</integer>
+			<key>ypos</key>
+			<integer>1395</integer>
 		</dict>
 		<key>45172797-CB73-4B37-9D16-16361898B16E</key>
 		<dict>
@@ -1810,6 +1828,13 @@
 			<integer>380</integer>
 			<key>ypos</key>
 			<integer>1180</integer>
+		</dict>
+		<key>505E48EB-944A-43A5-A2B1-1EC4D59E1B12</key>
+		<dict>
+			<key>xpos</key>
+			<integer>570</integer>
+			<key>ypos</key>
+			<integer>180</integer>
 		</dict>
 		<key>727301D6-8C5E-4482-9C94-1353E4C95199</key>
 		<dict>
@@ -1874,12 +1899,26 @@
 			<key>ypos</key>
 			<integer>545</integer>
 		</dict>
+		<key>AC2F12FC-9B58-4B0F-9DF5-F4FE5CAC71B1</key>
+		<dict>
+			<key>xpos</key>
+			<integer>795</integer>
+			<key>ypos</key>
+			<integer>395</integer>
+		</dict>
 		<key>AC370D95-EFA9-4318-BD0C-75A6033AC961</key>
 		<dict>
 			<key>xpos</key>
 			<integer>220</integer>
 			<key>ypos</key>
 			<integer>325</integer>
+		</dict>
+		<key>AE1EE4E2-94AB-4F46-8023-1074756E13DE</key>
+		<dict>
+			<key>xpos</key>
+			<integer>375</integer>
+			<key>ypos</key>
+			<integer>1630</integer>
 		</dict>
 		<key>BBF3882E-BBC1-48B1-A6E8-2CCD45899923</key>
 		<dict>
@@ -1902,6 +1941,13 @@
 			<key>ypos</key>
 			<integer>705</integer>
 		</dict>
+		<key>C6F247D9-4067-4EA5-83FB-7BC5C2FB4CDE</key>
+		<dict>
+			<key>xpos</key>
+			<integer>565</integer>
+			<key>ypos</key>
+			<integer>875</integer>
+		</dict>
 		<key>C7CDFC94-1FF3-4E08-9623-4FCDC53FBDF3</key>
 		<dict>
 			<key>xpos</key>
@@ -1909,26 +1955,26 @@
 			<key>ypos</key>
 			<integer>685</integer>
 		</dict>
-		<key>C831F248-3D91-482C-913E-F4BB4D0BE114</key>
-		<dict>
-			<key>xpos</key>
-			<integer>795</integer>
-			<key>ypos</key>
-			<integer>1090</integer>
-		</dict>
-		<key>CE1FA8B1-4DD0-45AC-A783-21781EE272DB</key>
+		<key>DC99DA30-639C-4ABA-9461-1D5A4E3E3E39</key>
 		<dict>
 			<key>xpos</key>
 			<integer>795</integer>
 			<key>ypos</key>
 			<integer>760</integer>
 		</dict>
-		<key>D940D852-4AC5-4000-9D54-5782443AE5AD</key>
+		<key>E19B6894-2D57-4949-823E-DD6B0B691124</key>
 		<dict>
 			<key>xpos</key>
-			<integer>795</integer>
+			<integer>565</integer>
 			<key>ypos</key>
-			<integer>395</integer>
+			<integer>545</integer>
+		</dict>
+		<key>EAD4440D-52FA-482C-B08D-4E21C7A17067</key>
+		<dict>
+			<key>xpos</key>
+			<integer>565</integer>
+			<key>ypos</key>
+			<integer>1180</integer>
 		</dict>
 		<key>EC818BAB-AC61-470C-84A3-8197806D7417</key>
 		<dict>
@@ -1937,19 +1983,12 @@
 			<key>ypos</key>
 			<integer>1035</integer>
 		</dict>
-		<key>F8B7B27F-4876-4451-A6C3-63ED0E81DE7F</key>
+		<key>EEDA9813-78C8-43AC-922B-A253413C2E3E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>565</integer>
+			<integer>790</integer>
 			<key>ypos</key>
-			<integer>875</integer>
-		</dict>
-		<key>FB271372-6D90-4F14-9343-BB1BBB751DD5</key>
-		<dict>
-			<key>xpos</key>
-			<integer>560</integer>
-			<key>ypos</key>
-			<integer>545</integer>
+			<integer>1080</integer>
 		</dict>
 	</dict>
 	<key>version</key>
