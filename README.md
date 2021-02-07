@@ -5,7 +5,7 @@
 Fetch and show emails through imap
 
 <p align="center">
-<img src="./demo.png">
+<img src="./demo.gif">
 </p>
 
 ## 📌 Prerequisite
@@ -31,6 +31,8 @@ May you can refer to the [documents](https://github.com/jopemachine/alfred-simpl
 ## 📍 Configuration
 
 You can configure detailed settings by editing your `config.json`.
+
+Example:
 
 ```json
 {
@@ -84,7 +86,9 @@ Append email provider name to email record.
 
 Type: `String (enum)`
 
-`date` or `from` or `date-from` or `from-date`
+`date` or `from` or `date-from` or `from-date` or `account` or `default`
+
+default value shows account, date, from.
 
 ### cacheDuration
 

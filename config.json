@@ -1,7 +1,7 @@
 {
     "autoMarkSeen": true,
     "providerPrefix": false,
-    "subtitle": "date-from",
+    "subtitle": "default",
     "cacheDuration": 30000,
     "sorting": "provider-timeDesc",
     "usingHtmlCache": true,

@@ -10,10 +10,6 @@ const usageCache = require('../cache.json')
 const { getTimeStamp, getParentAbsolutePath } = require('./utils')
 const { Worker } = require('worker_threads')
 
-// Avoids DEPTH_ZERO_SELF_SIGNED_CERT error for self-signed certs
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-process.removeAllListeners('warning')
-
 const searchCriteria = [process.argv[2]]
 const accountsArg = process.argv[3]
 
@@ -141,14 +137,22 @@ async function mainThreadCallback () {
       mailCounter,
       ..._.map(unreadMails, (mail) => {
         let subtitle = ''
+        const date = getTimeStamp(new Date(mail.date))
+        const from = mail.from
+        const account = config.accounts[mail.provider].imap.user
+
         if (config.subtitle === 'date') {
-          subtitle = getTimeStamp(new Date(mail.date))
+          subtitle = date
         } else if (config.subtitle === 'date-from') {
-          subtitle = `${getTimeStamp(new Date(mail.date))}, from ${mail.from}`
+          subtitle = `${date}, from ${from}`
         } else if (config.subtitle === 'from-date') {
-          subtitle = `${mail.from}, in ${getTimeStamp(new Date(mail.date))}`
+          subtitle = `${from}, in ${date}`
+        } else if (config.subtitle === 'account') {
+          subtitle = account
+        } else if (config.subtitle === 'from') {
+          subtitle = from
         } else {
-          subtitle = `${mail.from}`
+          subtitle = `${account}, in ${date}, from ${from}`
         }
 
         return {

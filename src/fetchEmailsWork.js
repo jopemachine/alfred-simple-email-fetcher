@@ -6,7 +6,8 @@ const config = require('../config.json')
 const simpleParser = require('mailparser').simpleParser
 const alfy = require('alfy')
 const _ = require('lodash')
-const { unbracket, checkFileExists } = require('./utils')
+const { checkFileExists } = require('./utils')
+// const { unbracket, checkFileExists } = require('./utils')
 
 const process = require('process')
 // Avoids DEPTH_ZERO_SELF_SIGNED_CERT error for self-signed certs
@@ -34,7 +35,7 @@ if (!isMainThread) {
       const mails = await Promise.all(
         _.map(messages, async function (item) {
           const header = _.find(item.parts, { which: 'HEADER' })
-          const mailId = unbracket(header.body['message-id'][0])
+          // const mailId = unbracket(header.body['message-id'][0])
 
           if (config.usingHtmlCache) {
             const all = _.find(item.parts, { which: '' })
@@ -53,7 +54,6 @@ if (!isMainThread) {
           }
 
           return {
-            mailId,
             uid: item.attributes.uid,
             provider: account,
             title: header.body.subject[0],
