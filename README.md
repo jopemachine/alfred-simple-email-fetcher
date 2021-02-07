@@ -4,7 +4,7 @@
 
 Fetch and show emails through imap
 
-<img src="./demo.gif" width="480" height="480">
+<img src="./demo.gif">
 
 ## 📌 Prerequisite
 

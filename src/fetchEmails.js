@@ -73,7 +73,7 @@ async function mainThreadCallback () {
     result = [
       {
         title: `No ${searchCriteria[0].toLowerCase()} emails`,
-        subtitle: `Searched through ${targetAccounts.length} providers`,
+        subtitle: `From ${targetAccounts.length} accounts`,
         text: {
           copy: `No ${searchCriteria[0].toLowerCase()} emails`,
           largetype: `No ${searchCriteria[0].toLowerCase()} emails`
@@ -123,7 +123,7 @@ async function mainThreadCallback () {
 
     const mailCounter = {
       title: `${unreadMails.length} emails were found.`,
-      subtitle: `Searched through ${targetAccounts.length} providers`,
+      subtitle: `From ${targetAccounts.length} accounts`,
       autocomplete: `${unreadMails.length}`,
       arg: '',
       quicklookurl: '',
