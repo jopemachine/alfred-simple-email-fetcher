@@ -39,7 +39,6 @@ Example:
     "subtitle": "date-from",
     "cacheDuration": false,
     "sorting": "provider-timedesc",
-    "usingHtmlCache": true,
     "accounts": {
         "google": {
             "enabled": true,
@@ -108,12 +107,6 @@ Sorts and returns search results.
 * `timeAsec` (old email first)
 * `provider-timeAsec`
 * `provider-timeDesc`
-
-### usingHtmlCache
-
-Type: `Boolean`
-
-Download emails by html file.
 
 ### accounts
 

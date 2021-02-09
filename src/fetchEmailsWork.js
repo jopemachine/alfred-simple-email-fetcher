@@ -1,70 +1,97 @@
 const { isMainThread, parentPort } = require('worker_threads')
 const fs = require('fs')
 const fsPromises = fs.promises
-const imaps = require('imap-simple')
 const config = require('../config.json')
 const simpleParser = require('mailparser').simpleParser
 const alfy = require('alfy')
-const _ = require('lodash')
-const { checkFileExists } = require('./utils')
-// const { unbracket, checkFileExists } = require('./utils')
+const Imap = require('imap')
 
 const process = require('process')
 // Avoids DEPTH_ZERO_SELF_SIGNED_CERT error for self-signed certs
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 process.removeAllListeners('warning')
 
+function openInbox (imap, cb) {
+  imap.openBox('INBOX', false, cb)
+}
+
 // Execute this work on each account
 if (!isMainThread) {
   parentPort.on('message', async ({ account, searchCriteria }) => {
+    if (!fs.existsSync(`htmlCache/${account}`)) {
+      await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
+    }
+
     try {
-      const imapConn = await imaps.connect(config.accounts[account])
-      await imapConn.openBox('INBOX')
+      const mails = []
+      const imap = new Imap(config.accounts[account].imap)
 
-      const fetchOptions = {
-        bodies: config.usingHtmlCache ? ['HEADER', 'TEXT', ''] : ['HEADER'],
-        markSeen: config.autoMarkSeen
-      }
+      imap.once('ready', function () {
+        openInbox(imap, function (err, box) {
+          if (err) throw err
+          imap.search(searchCriteria, function (err, uids) {
+            if (err) throw err
+            try {
+              const fetcher = imap.fetch(uids, {
+                bodies: '',
+                markSeen: config.autoMarkSeen
+              })
 
-      const messages = await imapConn.search(searchCriteria, fetchOptions)
+              fetcher.on('message', function (msg, seqno) {
+                let concatedBuf
+                const seqNumUidsMap = new Map()
 
-      if (!fs.existsSync(`htmlCache/${account}`)) {
-        await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
-      }
+                msg.on('body', function (rstream, info) {
+                  const buffers = []
 
-      const mails = await Promise.all(
-        _.map(messages, async function (item) {
-          const header = _.find(item.parts, { which: 'HEADER' })
-          // const mailId = unbracket(header.body['message-id'][0])
+                  rstream.on('data', (data) => {
+                    buffers.push(data)
+                  })
+                  rstream.on('end', () => {
+                    concatedBuf = Buffer.concat(buffers)
+                  })
+                })
+                msg.once('attributes', function (attrs) {
+                  seqNumUidsMap.set(seqno, attrs.uid)
+                })
+                msg.once('end', function () {
+                  simpleParser(concatedBuf).then(parsedResult => {
+                    const uid = seqNumUidsMap.get(seqno)
 
-          if (config.usingHtmlCache) {
-            const all = _.find(item.parts, { which: '' })
-            const id = item.attributes.uid
-            const idHeader = 'Imap-Id: ' + id + '\r\n'
-            const parsedResult = await simpleParser(idHeader + all.body)
-            const htmlCacheFileName = `htmlCache/${account}/${id}.html`
-
-            if ((await checkFileExists(htmlCacheFileName)) === false) {
-              await fsPromises.writeFile(
-                htmlCacheFileName,
-                parsedResult.html,
-                { encoding: 'utf-8' }
-              )
+                    fs.writeFileSync(`htmlCache/${account}/${uid}.html`, parsedResult.html)
+                    mails.push({
+                      uid,
+                      provider: account,
+                      title: parsedResult.subject,
+                      from: parsedResult.from.text,
+                      date: parsedResult.date
+                    })
+                    if (uids.length <= mails.length) imap.emit('end')
+                  })
+                })
+              })
+              fetcher.once('error', function (err) {
+                console.log('Fetch error: ' + err)
+              })
+            } catch (e) {
+              // Nothing to fetch error
+              parentPort.postMessage({ mails: [] })
+              parentPort.close()
             }
-          }
-
-          return {
-            uid: item.attributes.uid,
-            provider: account,
-            title: header.body.subject[0],
-            from: header.body.from[0],
-            date: Number(new Date(header.body.date[0]).getTime())
-          }
+          })
         })
-      )
+      })
 
-      parentPort.postMessage({ mails })
-      parentPort.close()
+      imap.once('error', function (err) {
+        console.log(err)
+      })
+
+      imap.once('end', function () {
+        parentPort.postMessage({ mails })
+        parentPort.close()
+      })
+
+      imap.connect()
     } catch (err) {
       parentPort.postMessage({
         errorMsg: {

@@ -1707,7 +1707,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>Alfred workflow that fetch and show emails from multiple accounts</string>
 	<key>uidata</key>
 	<dict>
 		<key>00F72F91-93B9-49C1-BCF3-AE1D932E6B14</key>

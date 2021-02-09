@@ -1,6 +1,6 @@
-/* eslint-disable node/no-path-concat */
 const alfy = require('alfy')
 const process = require('process')
+const path = require('path')
 const _ = require('lodash')
 const fs = require('fs')
 const fsPromises = fs.promises
@@ -45,7 +45,7 @@ if (targetAccounts.length === 0) {
   } else {
     const workers = new Set()
     for (const account of targetAccounts) {
-      const worker = new Worker(`${__dirname}/fetchEmailsWork.js`)
+      const worker = new Worker(path.join(`${__dirname}`, 'fetchEmailsWork.js'))
       workers.add(worker)
       worker.postMessage({
         account,
