@@ -160,10 +160,9 @@ async function mainThreadCallback () {
             ? `[${mail.provider}] ` + mail.title
             : mail.title,
           subtitle,
-          autocomplete: mail.title,
-          arg: `${getParentAbsolutePath()}/htmlCache/${
-            mail.provider
-          }/${mail.uid}.html`,
+          arg: `${getParentAbsolutePath()}/htmlCache/${mail.provider}/${
+            mail.uid
+          }.html`,
           quicklookurl: `${getParentAbsolutePath()}/htmlCache/${
             mail.provider
           }/${mail.uid}.html`,
@@ -171,10 +170,6 @@ async function mainThreadCallback () {
             path: config.accounts[mail.provider].icon
               ? `./icons/${config.accounts[mail.provider].icon}`
               : './icon.png'
-          },
-          text: {
-            copy: mail.title,
-            largetype: mail.title
           }
         }
       })
