@@ -24,7 +24,9 @@ if (!isMainThread) {
 
     try {
       const mails = []
-      const imap = new Imap(config.accounts[account].imap)
+      const imapConfig = config.accounts[account].imap
+      imapConfig.keepalive = false
+      const imap = new Imap(imapConfig)
 
       imap.once('ready', function () {
         openInbox(imap, function (err, box) {

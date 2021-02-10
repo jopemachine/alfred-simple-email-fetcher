@@ -134,11 +134,13 @@ icon files should be placed within `icons` folder.
 
 Type: `Object`
 
-imap configuration object used by [imap-simple](https://github.com/chadxz/imap-simple).
+imap configuration object used by [imap-simple](https://github.com/mscdex/node-imap#connection-instance-methods).
 
 imap's default port value is `993`.
 
 you could find out `host` value in your account's imap setting page.
+
+`keepalive` option will be set false in script, you can set other options in config file.
 
 
 ## 📗 How to use
