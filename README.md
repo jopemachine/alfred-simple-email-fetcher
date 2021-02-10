@@ -134,7 +134,7 @@ icon files should be placed within `icons` folder.
 
 Type: `Object`
 
-imap configuration object used by [imap-simple](https://github.com/mscdex/node-imap#connection-instance-methods).
+imap configuration object used by [node-imap](https://github.com/mscdex/node-imap#connection-instance-methods).
 
 imap's default port value is `993`.
 
