@@ -121,16 +121,20 @@ async function mainThreadCallback () {
         break
     }
 
+    let hasCutted = false
+    const fetchedEmailsCount = unreadMails.length
+    if (fetchedEmailsCount > config.maxEmailsCount) {
+      unreadMails = unreadMails.slice(0, config.maxEmailsCount)
+      hasCutted = true
+    }
+
     const mailCounter = {
-      title: `${unreadMails.length} emails were found.`,
-      subtitle: `From ${targetAccounts.length} accounts`,
-      autocomplete: `${unreadMails.length}`,
-      arg: '',
-      quicklookurl: '',
-      text: {
-        copy: `${unreadMails.length} emails were found.`,
-        largetype: `${unreadMails.length} emails were found.`
-      }
+      title: `${fetchedEmailsCount} emails were found.`,
+      subtitle: `From ${targetAccounts.length} accounts ${
+        hasCutted
+          ? '(' + (fetchedEmailsCount - unreadMails.length) + ' not shows)'
+          : ''
+      }`
     }
 
     result = [
@@ -188,9 +192,5 @@ async function mainThreadCallback () {
     })
 
   alfy.output(result)
-
-  // * Force the connection to shut down.
-  // * May have a memory leak because connection close is not called explicitly.
-
   process.exit(1)
 }

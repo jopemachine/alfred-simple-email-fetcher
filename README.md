@@ -38,6 +38,7 @@ Example:
     "providerPrefix": true,
     "subtitle": "date-from",
     "cacheDuration": false,
+    "maxEmailsCount": 50,
     "sorting": "provider-timedesc",
     "accounts": {
         "google": {
@@ -94,6 +95,12 @@ Type: `Number | Boolean`
 set cache period (ms)
 
 To not use caching, set this value to `false`
+
+### maxEmailsCount
+
+Type: `Number`
+
+Set the maximum number of emails to display.
 
 ### sorting
 

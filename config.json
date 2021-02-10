@@ -4,6 +4,7 @@
     "subtitle": "default",
     "cacheDuration": 30000,
     "sorting": "provider-timeDesc",
+    "maxEmailsCount": 50,
     "accounts": {
         "google": {
             "enabled": false,
