@@ -10,10 +10,17 @@ const usageCache = require('../cache.json')
 const { getTimeStamp, getParentAbsolutePath } = require('./utils')
 const { Worker } = require('worker_threads')
 
-const searchCriteria = [process.argv[2]]
+let searchCriteria = [process.argv[2]]
 const accountsArg = process.argv[3]
 
 let unreadMails = []
+let checkFlag = false
+
+if (process.argv[2] === 'UNSEEN-NOCACHE') {
+  checkFlag = true
+  searchCriteria = ['UNSEEN']
+}
+
 const targetAccounts = accountsArg
   ? accountsArg.includes(',')
     ? accountsArg.split(',')
@@ -49,6 +56,7 @@ if (targetAccounts.length === 0) {
       workers.add(worker)
       worker.postMessage({
         account,
+        checkFlag,
         searchCriteria
       })
       worker.on('message', async ({ mails, errorMsg }) => {
@@ -84,19 +92,20 @@ async function mainThreadCallback () {
       }
     ]
   } else {
-    await fsPromises.writeFile(
-      'cache.json',
-      '\ufeff' +
-        JSON.stringify(
-          {
-            date: new Date().getTime(),
-            cache: unreadMails
-          },
-          null,
-          2
-        ),
-      { encoding: 'utf-8' }
-    )
+    !checkFlag &&
+      (await fsPromises.writeFile(
+        'cache.json',
+        '\ufeff' +
+          JSON.stringify(
+            {
+              date: new Date().getTime(),
+              cache: unreadMails
+            },
+            null,
+            2
+          ),
+        { encoding: 'utf-8' }
+      ))
 
     switch (config.sorting) {
       case 'subject':

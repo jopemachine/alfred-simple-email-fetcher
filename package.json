@@ -1,11 +1,13 @@
 {
   "name": "alfred-simple-email-fetcher",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Alfred workflow that fetch and show emails from multiple accounts using imap",
   "scripts": {
     "lint": "eslint src",
     "postinstall": "alfy-init",
-    "preuninstall": "alfy-cleanup"
+    "preuninstall": "alfy-cleanup",
+    "cp": "cp _cache.json cache.json && cp _config.json config.json",
+    "cl": "git checkout -- cache.json && git checkout -- config.json"
   },
   "repository": {
     "type": "git",

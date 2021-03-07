@@ -17,8 +17,8 @@ function openInbox (imap, cb) {
 
 // Execute this work on each account
 if (!isMainThread) {
-  parentPort.on('message', async ({ account, searchCriteria }) => {
-    if (!fs.existsSync(`htmlCache/${account}`)) {
+  parentPort.on('message', async ({ checkFlag, account, searchCriteria }) => {
+    if (!checkFlag && !fs.existsSync(`htmlCache/${account}`)) {
       await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
     }
 
@@ -35,7 +35,7 @@ if (!isMainThread) {
             if (err) throw err
             try {
               const fetcher = imap.fetch(uids, {
-                bodies: '',
+                bodies: checkFlag ? 'HEADER' : '',
                 markSeen: config.autoMarkSeen
               })
 
@@ -57,10 +57,15 @@ if (!isMainThread) {
                   seqNumUidsMap.set(seqno, attrs.uid)
                 })
                 msg.once('end', function () {
-                  simpleParser(concatedBuf).then(parsedResult => {
-                    const uid = seqNumUidsMap.get(seqno)
+                  const uid = seqNumUidsMap.get(seqno)
 
-                    fs.writeFileSync(`htmlCache/${account}/${uid}.html`, parsedResult.html)
+                  simpleParser(concatedBuf).then((parsedResult) => {
+                    !checkFlag &&
+                      fs.writeFileSync(
+                        `htmlCache/${account}/${uid}.html`,
+                        parsedResult.html
+                      )
+
                     mails.push({
                       uid,
                       provider: account,

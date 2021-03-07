@@ -156,6 +156,12 @@ you could find out `host` value in your account's imap setting page.
 
 Fetch and show emails on `UNSEEN` state from registered accounts.
 
+### emc
+
+Fetch and show emails on `UNSEEN` state from registered accounts.
+
+`emc` doesn't fetch and cache email's html body, So it could be faster than `emu`.
+
 ### emau
 
 Select one provider and fetch only the account's `UNSEEN` emails.
