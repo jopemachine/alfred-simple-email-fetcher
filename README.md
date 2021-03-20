@@ -1,6 +1,6 @@
 # ✉️ alfred-simple-email-fetcher
 
-<img src="https://img.shields.io/badge/Alfred-4-blueviolet"> <img src="https://img.shields.io/github/license/jopemachine/alfred-simple-email-fetcher.svg" alt="License">
+<img src="https://img.shields.io/badge/Alfred-4-blueviolet"> <img src="https://img.shields.io/github/license/jopemachine/alfred-simple-email-fetcher.svg" alt="License"> <img src="https://img.shields.io/npm/dt/alfred-simple-email-fetcher" alt="NPM Release">
 
 Fetch and show emails through imap
 
