@@ -8,7 +8,8 @@ Fetch and show emails through imap
 
 ## 📌 Prerequisite
 
-* Node JS
+* Node JS onwards `11.7.0`
+(Due to using `worker_thread` module)
 
 * [Alfred powerpack](https://www.alfredapp.com/powerpack/)
 

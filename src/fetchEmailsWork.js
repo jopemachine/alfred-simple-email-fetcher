@@ -1,10 +1,12 @@
 const { isMainThread, parentPort } = require('worker_threads')
 const fs = require('fs')
 const fsPromises = fs.promises
-const config = require('../config.json')
 const simpleParser = require('mailparser').simpleParser
 const alfy = require('alfy')
 const Imap = require('imap')
+
+require('./init')
+const config = alfy.config.get('setting')
 
 const process = require('process')
 // Avoids DEPTH_ZERO_SELF_SIGNED_CERT error for self-signed certs

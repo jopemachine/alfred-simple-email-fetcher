@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const alfy = require('alfy')
-const config = require('../config.json')
+require('./init')
+const config = alfy.config.get('setting')
 
 const showAllAccounts = {
   title: 'Fetch from all accounts',

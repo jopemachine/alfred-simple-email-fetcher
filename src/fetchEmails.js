@@ -5,7 +5,8 @@ const _ = require('lodash')
 const fs = require('fs')
 const fsPromises = fs.promises
 
-const config = require('../config.json')
+require('./init')
+const config = alfy.config.get('setting')
 const usageCache = require('../cache.json')
 const { getTimeStamp, getParentAbsolutePath } = require('./utils')
 const { Worker } = require('worker_threads')

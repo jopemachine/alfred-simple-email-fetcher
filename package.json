@@ -1,13 +1,11 @@
 {
   "name": "alfred-simple-email-fetcher",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Alfred workflow that fetch and show emails from multiple accounts using imap",
   "scripts": {
     "lint": "eslint src",
     "postinstall": "alfy-init",
-    "preuninstall": "alfy-cleanup",
-    "cp": "cp _cache.json cache.json && cp _config.json config.json",
-    "cl": "git checkout -- cache.json && git checkout -- config.json"
+    "preuninstall": "alfy-cleanup"
   },
   "repository": {
     "type": "git",
@@ -16,13 +14,17 @@
   "bugs": {
     "url": "https://github.com/jopemachine/alfred-simple-email-fetcher/issues"
   },
+  "engines": {
+    "node": ">=11.7.0"
+  },
   "author": "jopemachine",
   "license": "MIT",
   "keywords": [
     "alfred",
     "alfred-workflow",
     "imap",
-    "alfy"
+    "alfy",
+    "email"
   ],
   "files": [
     "src/*.js",
