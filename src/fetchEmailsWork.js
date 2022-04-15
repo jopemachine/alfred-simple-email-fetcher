@@ -1,117 +1,160 @@
-const { isMainThread, parentPort } = require('worker_threads')
-const fs = require('fs')
-const fsPromises = fs.promises
-const simpleParser = require('mailparser').simpleParser
-const alfy = require('alfy')
-const Imap = require('imap')
+const {simpleParser} = require('mailparser');
+// const alfy = require('alfy');
+const Imap = require('imap');
 
-require('./init')
-const config = alfy.config.get('setting')
+require('./init');
 
-const process = require('process')
-// Avoids DEPTH_ZERO_SELF_SIGNED_CERT error for self-signed certs
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-process.removeAllListeners('warning')
+const config = {
+	"autoMarkSeen": true,
+		"providerPrefix": false,
+		"subtitle": "default",
+		"sorting": "provider-timeDesc",
+		"usingHtmlCache": true,
+		"maxEmailsCount": 50,
+		"accounts": {
+			"naver": {
+				"url": "https://mail.naver.com/",
+				"link": "https://mail.naver.com/",
+				"enabled": true,
+				"icon": "naver.png",
+				"imap": {
+					"user": "jopemachine@naver.com",
+					"password": "!jpM2s261V0",
+					"host": "imap.naver.com",
+					"port": 993,
+					"tls": true,
+					"authTimeout": 3000
+				}
+			},
+			"naver2": {
+				"url": "https://mail.naver.com/",
+				"enabled": true,
+				"icon": "naver.png",
+				"imap": {
+					"user": "jopemachine@naver.com",
+					"password": "!jpM2s261V0",
+					"host": "imap.naver.com",
+					"port": 993,
+					"tls": true,
+					"authTimeout": 3000
+				}
+			},
+			"naver3": {
+				"url": "https://mail.naver.com/",
+				"enabled": true,
+				"icon": "naver.png",
+				"imap": {
+					"user": "jopemachine@naver.com",
+					"password": "!jpM2s261V0",
+					"host": "imap.naver.com",
+					"port": 993,
+					"tls": true,
+					"authTimeout": 3000
+				}
+			}
+		}
+};
 
-function openInbox (imap, cb) {
-  imap.openBox('INBOX', false, cb)
+function openInbox(imap, callback) {
+	imap.openBox('INBOX', true, callback);
 }
 
-// Execute this work on each account
-if (!isMainThread) {
-  parentPort.on('message', async ({ checkFlag, account, searchCriteria }) => {
-    if (!checkFlag && !fs.existsSync(`htmlCache/${account}`)) {
-      await fsPromises.mkdir(`htmlCache/${account}`, { recursive: true })
-    }
+const fetchEmailsWork = async ({account, searchCriteria}) => {
+	return new Promise((resolve, reject) => {
+		try {
+			const mails = [];
+			const imapConfig = config.accounts[account].imap;
+			imapConfig.keepalive = false;
+			const imapConnection = new Imap(imapConfig);
 
-    try {
-      const mails = []
-      const imapConfig = config.accounts[account].imap
-      imapConfig.keepalive = false
-      const imap = new Imap(imapConfig)
+			const clearConnection = () => {
+				imapConnection.destroy();
+			};
 
-      imap.once('ready', function () {
-        openInbox(imap, function (err, box) {
-          if (err) throw err
-          imap.search(searchCriteria, function (err, uids) {
-            if (err) throw err
-            try {
-              const fetcher = imap.fetch(uids, {
-                bodies: checkFlag ? 'HEADER' : '',
-                markSeen: config.autoMarkSeen
-              })
+			imapConnection.once('ready', () => {
+				openInbox(imapConnection, (error, box) => {
+					if (error) {
+						throw error;
+					}
 
-              fetcher.on('message', function (msg, seqno) {
-                let concatedBuf
-                const seqNumUidsMap = new Map()
+					imapConnection.search(searchCriteria, (error, uids) => {
+						if (error) {
+							throw error;
+						}
 
-                msg.on('body', function (rstream, info) {
-                  const buffers = []
+						try {
+							const fetcher = imapConnection.fetch(uids, {
+								bodies: 'HEADER.FIELDS (FROM SUBJECT DATE)',
+								markSeen: config.autoMarkSeen
+							});
 
-                  rstream.on('data', (data) => {
-                    buffers.push(data)
-                  })
-                  rstream.on('end', () => {
-                    concatedBuf = Buffer.concat(buffers)
-                  })
-                })
-                msg.once('attributes', function (attrs) {
-                  seqNumUidsMap.set(seqno, attrs.uid)
-                })
-                msg.once('end', function () {
-                  const uid = seqNumUidsMap.get(seqno)
+							fetcher.on('message', (message, seqNumber) => {
+								let concatedBuf;
+								const seqNumberUidsMap = new Map();
 
-                  simpleParser(concatedBuf).then((parsedResult) => {
-                    !checkFlag &&
-                      fs.writeFileSync(
-                        `htmlCache/${account}/${uid}.html`,
-                        parsedResult.html
-                      )
+								message.on('body', (readableStream, info) => {
+									const buffers = [];
 
-                    mails.push({
-                      uid,
-                      provider: account,
-                      title: parsedResult.subject,
-                      from: parsedResult.from.text,
-                      date: parsedResult.date
-                    })
-                    if (uids.length <= mails.length) imap.emit('end')
-                  })
-                })
-              })
-              fetcher.once('error', function (err) {
-                console.log('Fetch error: ' + err)
-              })
-            } catch (e) {
-              // Nothing to fetch error
-              parentPort.postMessage({ mails: [] })
-              parentPort.close()
-            }
-          })
-        })
-      })
+									readableStream.on('data', data => {
+										buffers.push(data);
+									});
+									readableStream.on('end', () => {
+										concatedBuf = Buffer.concat(buffers);
+									});
+								});
+								message.once('attributes', attrs => {
+									seqNumberUidsMap.set(seqNumber, attrs.uid);
+								});
+								message.once('end', () => {
+									const uid = seqNumberUidsMap.get(seqNumber);
 
-      imap.once('error', function (err) {
-        console.log(err)
-      })
+									simpleParser(concatedBuf).then(parsedResult => {
+										mails.push({
+											uid,
+											provider: account,
+											title: parsedResult.subject,
+											from: parsedResult.from.text,
+											date: parsedResult.date
+										});
 
-      imap.once('end', function () {
-        parentPort.postMessage({ mails })
-        parentPort.close()
-      })
+										if (uids.length <= mails.length) {
+											imapConnection.emit('end');
+										}
+									});
+								});
+							});
+							fetcher.once('error', error_ => {
+								reject(error_);
+							});
+						} catch {
+							// Nothing to fetch error
+							clearConnection();
+							resolve([]);
+						}
+					});
+				});
+			});
 
-      imap.connect()
-    } catch (err) {
-      parentPort.postMessage({
-        errorMsg: {
-          title: `Authentication failure in "${account}" account`,
-          subtitle: `Check smtp/imap setting on ${account} email settings`,
-          icon: {
-            path: alfy.icon.error
-          }
-        }
-      })
-      parentPort.close()
-    }
-  })
-}
+			imapConnection.once('error', error => {
+				clearConnection();
+				reject(error);
+			});
+
+			imapConnection.once('end', () => {
+				clearConnection();
+				resolve(mails);
+			});
+
+			imapConnection.connect();
+		} catch {
+			reject({
+				errorMsg: {
+					title: `Authentication failure in "${account}" account`,
+					subtitle: `Check smtp/imap setting on ${account} email settings`
+				}
+			});
+		}
+	});
+};
+
+module.exports = fetchEmailsWork;

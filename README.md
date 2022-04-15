@@ -2,20 +2,19 @@
 
 <img src="https://img.shields.io/badge/Alfred-4-blueviolet"> <img src="https://img.shields.io/github/license/jopemachine/alfred-simple-email-fetcher.svg" alt="License"> <img src="https://img.shields.io/npm/dt/alfred-simple-email-fetcher" alt="NPM Release">
 
-Fetch and show emails through imap
+Fetch new emails in Alfred
 
 <img src="./demo.gif">
 
 ## 📌 Prerequisite
 
-* Node JS onwards `11.7.0`
-(Due to using `worker_thread` module)
+* Node JS higher than `11.7.0`
 
 * [Alfred powerpack](https://www.alfredapp.com/powerpack/)
 
 ##  🔨 How to install
 
-1. Install package by npm
+1. Install package through npm
 
 ```
 $ npm install --global alfred-simple-email-fetcher
@@ -25,7 +24,6 @@ $ npm install --global alfred-simple-email-fetcher
 
 3. Set the imap settings for the account you added.
 May you can refer to the [documents](https://github.com/jopemachine/alfred-simple-email-fetcher/tree/master/documents)
-
 
 ## 📍 Configuration
 
@@ -38,13 +36,13 @@ Example:
     "autoMarkSeen": false,
     "providerPrefix": true,
     "subtitle": "date-from",
-    "cacheDuration": false,
     "maxEmailsCount": 50,
     "sorting": "provider-timedesc",
     "accounts": {
         "google": {
             "enabled": true,
             "icon": "google.png",
+						"link": "https://mail.google.com/mail/",
             "imap": {
                 "user": "user@gmail.com",
                 "password": "account_password",
@@ -57,6 +55,7 @@ Example:
         "naver": {
             "enabled": true,
             "icon": "naver.png",
+						"link": "https://mail.naver.com/",
             "imap": {
                 "user": "user@naver.com",
                 "password": "account_password",
@@ -88,14 +87,6 @@ Type: `String (enum)`
 `date` or `from` or `date-from` or `from-date` or `account` or `default`
 
 default value shows account, date, from.
-
-### cacheDuration
-
-Type: `Number | Boolean`
-
-set cache period (ms)
-
-To not use caching, set this value to `false`
 
 ### maxEmailsCount
 
@@ -150,18 +141,11 @@ you could find out `host` value in your account's imap setting page.
 
 `keepalive` option will be set false in script, you can set other options in config file.
 
-
 ## 📗 How to use
 
 ### emu
 
 Fetch and show emails on `UNSEEN` state from registered accounts.
-
-### emc
-
-Fetch and show emails on `UNSEEN` state from registered accounts.
-
-`emc` doesn't fetch and cache email's html body, So it could be faster than `emu`.
 
 ### emau
 
@@ -169,34 +153,4 @@ Select one provider and fetch only the account's `UNSEEN` emails.
 
 You can fetch emails which account's `enabled` is false by this method.
 
-### emd
-
-Fetch and show emails on `DRAFT` state from registered accounts.
-
-### emad
-
-Select one provider and fetch only the account's `DRAFT` emails.
-
-### emf
-
-Fetch and show emails on `FLAGGED` state from registered accounts.
-
-### emaf
-
-Select one provider and fetch only the account's `FLAGGED` emails.
-
-### emans
-
-Fetch and show emails on `ANSWERED` state from registered accounts.
-
-### emaans
-
-Select one provider and fetch only the account's `ANSWERED` emails.
-
-### em > config
-
 Open the `config.json` file through your editor.
-
-### em > clearcache
-
-Clean all saved html cache.

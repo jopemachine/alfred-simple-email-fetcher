@@ -1,9 +1,9 @@
 {
   "name": "alfred-simple-email-fetcher",
-  "version": "0.1.8",
-  "description": "Alfred workflow that fetch and show emails from multiple accounts using imap",
+  "version": "0.2.2",
+  "description": "Fetch new emails in Alfred",
   "scripts": {
-    "lint": "eslint src",
+    "lint": "xo --fix src",
     "postinstall": "alfy-init",
     "preuninstall": "alfy-cleanup"
   },
@@ -20,34 +20,26 @@
   "author": "jopemachine",
   "license": "MIT",
   "keywords": [
+    "imap",
+    "email",
     "alfred",
     "alfred-workflow",
-    "imap",
-    "alfy",
-    "email"
+    "alfy"
   ],
   "files": [
     "src/*.js",
     "icon.png",
     "info.plist",
-    "icons/*.png",
-    "documents/*.md",
-    "cache.json",
-    "config.json",
-    "LICENSE"
+    "icons/*.png"
   ],
   "dependencies": {
     "alfy": "^0.10.0",
     "imap": "^0.8.19",
     "lodash": "^4.17.20",
-    "mailparser": "^3.0.1"
+    "mailparser": "^3.0.1",
+    "p-map": "^4.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.19.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "husky": "^4.3.8"
+    "xo": "^0.39.1"
   }
 }
