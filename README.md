@@ -12,7 +12,7 @@ Fetch new emails in Alfred
 
 * [Alfred powerpack](https://www.alfredapp.com/powerpack/)
 
-##  🔨 How to install
+## 🔨 How to install
 
 1. Install package through npm
 
@@ -42,7 +42,7 @@ Example:
         "google": {
             "enabled": true,
             "icon": "google.png",
-						"link": "https://mail.google.com/mail/",
+            "link": "https://mail.google.com/mail/",
             "imap": {
                 "user": "user@gmail.com",
                 "password": "account_password",
@@ -55,7 +55,7 @@ Example:
         "naver": {
             "enabled": true,
             "icon": "naver.png",
-						"link": "https://mail.naver.com/",
+            "link": "https://mail.naver.com/",
             "imap": {
                 "user": "user@naver.com",
                 "password": "account_password",
@@ -68,6 +68,7 @@ Example:
     }
 }
 ```
+
 ### autoMarkSeen
 
 Type: `Boolean`
